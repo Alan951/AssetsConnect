@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
             if(username.length() < 5){
                 errorUsuario = "El username debe de tener almenos 5 letras";
                 errorFlag = true;
-            }if(password.length() < 5 || password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){
+            }if(password.length() < 5 || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){
                 errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
                 errorFlag = true;
             }
