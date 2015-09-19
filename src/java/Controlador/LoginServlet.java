@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
             boolean errorFlag = false;
             String errorUsuario = "";
             String errorPass = "";
-
+            //test
             if(username.length() < 5){
                 errorUsuario = "El username debe de tener almenos 5 letras";
                 errorFlag = true;
