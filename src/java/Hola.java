@@ -41,6 +41,7 @@ public class Hola extends HttpServlet {
             out.println("<h4>Que onda Jorsh</h4>");
             out.println("<h1>Que ondas fer's</h1>");
             out.println("<h1>Que tal</h1>");
+            out.println("hola");
             out.println("</body>");
             out.println("</html>");
         }
