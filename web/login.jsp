@@ -12,13 +12,23 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
+        <% 
+            String errorUsuario = request.getParameter("errorUsuario");
+            String errorPass = request.getParameter("errorPass");
+        %>
+        
         <h1>Introduzca los datos huevooooon</h1>
         <form action="LoginServlet">
             Usuario: <input type="text" name="usuario">
-            <span><%=request.getParameter("errorUsuario")%></span>
+            <%if(errorUsuario != null){%>
+            <span><%=errorUsuario%></span>
+            <%}%>
             <br><br>
             Password: <input type="password" name="password">
-            <span><%=request.getParameter("errorPass")%></span>
+            <%if(errorPass != null){%>
+            <span><%=errorPass%></span>
+            <%}%>
             <br><br>
             <input type="submit" value="Enviar">
         </form>
