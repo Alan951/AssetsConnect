@@ -15,7 +15,7 @@ public class UsuarioLogin {
     private String username;
     private String password;
     
-    public UsuarioLogin(){
+    public UsuarioLogin(String username, String password){
         setUsername(username);
         setPassword(password);
     }

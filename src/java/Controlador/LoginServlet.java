@@ -6,6 +6,8 @@ package Controlador;
  * and open the template in the editor.
  */
 
+import Modelo.UsuarioLogin;
+import SQLdb.UsuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -52,8 +54,14 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass);
             }else{
                 //UsuarioDAO
-                
-                
+                UsuarioLogin user = new UsuarioLogin(username, password);
+                UsuarioDAO dao = new UsuarioDAO();
+                if(dao.verificarLogin(user)){
+                    response.sendRedirect("bienvenida.jsp");
+                    //Crear una nueva sesion abajo.
+                }else{
+                    response.sendRedirect("login.jsp?login=loginFail");
+                }
             }
         }
     }
