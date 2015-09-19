@@ -50,6 +50,8 @@ public class LoginServlet extends HttpServlet {
             
             if(errorFlag){
                 response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass);
+            }else{
+                response.sendRedirect("principal.jsp");
             }
         }
     }
