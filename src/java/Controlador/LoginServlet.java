@@ -40,10 +40,10 @@ public class LoginServlet extends HttpServlet {
             String errorUsuario = "";
             String errorPass = "";
 
-            if(username.length() < 5){
+            if(username.length() < 5){ //verificar username
                 errorUsuario = "El username debe de tener almenos 5 letras";
                 errorFlag = true;
-            }if(password.length() < 5 || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){
+            }if(password.length() < 5 || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){ //Verificar password
                 errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
                 errorFlag = true;
             }
@@ -51,7 +51,9 @@ public class LoginServlet extends HttpServlet {
             if(errorFlag){
                 response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass);
             }else{
-                response.sendRedirect("principal.jsp");
+                //UsuarioDAO
+                
+                
             }
         }
     }
