@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Introduzca los datos huevooooon</h1>
-        <form action="LoginServlet.java">
+        <form action="LoginServlet">
             Usuario: <input type="text" name="usuario">
             <br><br>
             Password: <input type="password" name="password">
