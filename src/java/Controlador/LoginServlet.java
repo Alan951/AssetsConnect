@@ -33,8 +33,8 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String username = "";
-            String password = "";
+            String username = request.getParameter("usuario");
+            String password = request.getParameter("password");
 
             boolean errorFlag = false;
             String errorUsuario = "";
@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
                 errorUsuario = "El username debe de tener almenos 5 letras";
                 errorFlag = true;
             }if(password.length() < 5 || password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){
-                errorPass = "\nLa contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
+                errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
                 errorFlag = true;
             }
             
