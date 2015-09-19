@@ -15,8 +15,10 @@
         <h1>Introduzca los datos huevooooon</h1>
         <form action="LoginServlet">
             Usuario: <input type="text" name="usuario">
+            <span><%=request.getParameter("errorUsuario")%></span>
             <br><br>
             Password: <input type="password" name="password">
+            <span><%=request.getParameter("errorPass")%></span>
             <br><br>
             <input type="submit" value="Enviar">
         </form>
