@@ -1,3 +1,5 @@
+package Controlador;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author jorge
  */
-public class Hola extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +33,26 @@ public class Hola extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Hola</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Hola at " + request.getContextPath() + "</h1>");
-            out.println("<h4>Que onda Jorsh</h4>");
-            out.println("<h1>Que ondas fer's</h1>");
-            out.println("<h1>Que tal</h1>");
-            out.println("hola");
-            out.println("</body>");
-            out.println("</html>");
+            String username = "";
+            String password = "";
+            String nombre = "";
+            //HOLLAAAA
+            boolean errorFlag = false;
+            String error = "";
+            if(username.length() < 5){
+                error += "El username debe de tener almenos 5 letras";
+                errorFlag = true;
+            }if(password.length() < 5 || password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){
+                error += "\nLa contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
+                errorFlag = true;
+            }if(nombre.length() < 4){
+                error += "\nEl nombre no es valido";
+                errorFlag = true;
+            }
+            
+            if(errorFlag){
+                response.sendRedirect("login.jsp?error="+error);
+            }
         }
     }
 
