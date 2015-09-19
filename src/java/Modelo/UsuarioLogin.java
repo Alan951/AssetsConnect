@@ -11,11 +11,11 @@ import Utilidades.Utilidades;
  *
  * @author jorge
  */
-public class UsuarioDAO {
+public class UsuarioLogin {
     private String username;
     private String password;
     
-    public UsuarioDAO(){
+    public UsuarioLogin(){
         setUsername(username);
         setPassword(password);
     }
