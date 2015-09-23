@@ -5,33 +5,29 @@
  */
 package Modelo;
 
-import Utilidades.Utilidades;
 
-/**
- *
- * @author jorge
- */
-public class UsuarioLogin {
-    private String username;
+public class Usuario {
+    private String nombre;
     private String password;
     
-    public UsuarioLogin(String username, String password){
-        setUsername(username);
+    //Metodo constructor utilizado al momento de registrar un usuario
+    public Usuario(String nombre, String password){
+        setNombre(nombre);
         setPassword(password);
-    }
-    
-    /**
-     * @return the username
-     */
-    public String getUsername() {
-        return username;
     }
 
     /**
-     * @param username the username to set
+     * @return the nombre
      */
-    public void setUsername(String username) {
-        this.username = username;
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     /**
@@ -45,7 +41,6 @@ public class UsuarioLogin {
      * @param password the password to set
      */
     public void setPassword(String password) {
-        //Cifrar datos
-        this.password = Utilidades.cifrarDatos(password);
+        this.password = Utilidades.Utilidades.cifrarDatos(password);
     }
 }

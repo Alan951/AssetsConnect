@@ -1,10 +1,9 @@
-package Controlador;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Controlador;
 
 import Modelo.Usuario;
 import SQLdb.UsuarioDAO;
@@ -17,9 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author jorge
+ * @author Jorge
  */
-public class LoginServlet extends HttpServlet {
+public class RegistroServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,32 +36,27 @@ public class LoginServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String nombre = request.getParameter("usuario");
             String password = request.getParameter("password");
-
+            
             boolean errorFlag = false;
             String errorUsuario = "";
             String errorPass = "";
+            String errorNombre = "";
 
-            if(nombre.length() < 4){ //verificar username
-                errorUsuario = "El username debe de tener almenos 5 letras";
-                errorFlag = true;
-            }if(password.length() < 5 || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){ //Verificar password
+            if(password.length() < 5 || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){ //Verificar password
                 errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
+                errorFlag = true;
+            }if(nombre.length() < 5){
+                errorNombre = "El nombre debe de tener al menos 5 caracteres";
                 errorFlag = true;
             }
             
-            
             if(errorFlag){
-                response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass);
+                response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass+"&errorNombre="+errorNombre);
             }else{
                 //UsuarioDAO
-                Usuario user = new Usuario(nombre, password);
+                Usuario userReg = new Usuario(nombre, password);
                 UsuarioDAO dao = new UsuarioDAO();
-                if(dao.verificarLogin(user)){
-                    response.sendRedirect("bienvenida.jsp");
-                    //Crear una nueva sesion abajo.
-                }else{
-                    response.sendRedirect("login.jsp?login=loginFail");
-                }
+                dao.registrarUsuario(userReg);
             }
         }
     }
