@@ -37,6 +37,25 @@ public class UsuarioDAO {
         return login;
     }
     
+    public boolean comprobarUsuario(String nombre){
+        DbConnection conex = new DbConnection();
+        boolean existe = false;
+        try{
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FORM `usuarios` WHERE BINARY nombre = ?");
+            consulta.setString(1, nombre);
+            ResultSet res = consulta.executeQuery();
+            while(res.next()){
+                existe = true;
+            }
+            res.close();
+            consulta.close();
+            conex.desconectar();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return existe;
+    }
+    
     public void registrarUsuario(Usuario userReg){
         DbConnection conex = new DbConnection();
         try{
@@ -49,4 +68,5 @@ public class UsuarioDAO {
             e.printStackTrace();
         }
     }
+    
 }

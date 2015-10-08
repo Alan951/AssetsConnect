@@ -4,6 +4,7 @@ package SQLdb;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,17 +23,24 @@ public class DbConnection {
     Connection connection;
     
     public DbConnection(){
+        //URL ARCHIVO
+//        String userDir = System.getProperty("user.dir");
+//        String separador = System.getProperty("file.separator");
+//        String url = userDir+separador+"Files"+separador+"info.properties";
+        //String glassFish = System.getProperty("com.sun.aas.instanceRoot");
+        //Properties prop = System.getProperties();
+        //System.out.println(glassFish);
         //Cargar credenciales.
         try{
             Properties propiedades = new Properties();
             propiedades.load(new FileInputStream("C://info.properties"));
-            
+            //propiedades.load(new FileInputStream(url));
             bd = propiedades.getProperty("bd");
             login = propiedades.getProperty("login");
             password = propiedades.getProperty("password");
             url = propiedades.getProperty("url");
         }catch(FileNotFoundException fnfe){
-            System.out.println("No se ha encontrado archivo.");
+            System.out.println("No se ha encontrado archivo. | ");
         }catch(IOException ioe){
             ioe.printStackTrace();
         }

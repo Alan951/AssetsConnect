@@ -49,14 +49,17 @@ public class RegistroServlet extends HttpServlet {
                 errorNombre = "El nombre debe de tener al menos 5 caracteres";
                 errorFlag = true;
             }
+            UsuarioDAO dao = new UsuarioDAO();
             
             if(errorFlag){
                 response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass+"&errorNombre="+errorNombre);
+            }
+            if(dao.comprobarUsuario(nombre)){
+                errorUsuario = "El usuario ya existe";
+                response.sendRedirect("login.jsp?errorUsuario=Ya Existe");
             }else{
-                //UsuarioDAO
-                Usuario userReg = new Usuario(nombre, password);
-                UsuarioDAO dao = new UsuarioDAO();
-                dao.registrarUsuario(userReg);
+                dao.registrarUsuario(new Usuario(nombre, password));
+                response.sendRedirect("login.jsp?registro=completo");
             }
         }
     }
