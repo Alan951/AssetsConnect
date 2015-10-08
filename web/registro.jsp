@@ -1,11 +1,12 @@
+<%-- 
+    Document   : registro
+    Created on : 30/09/2015, 01:19:06 PM
+    Author     : fernandoei
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <!-- Basic Page Needs
     ================================================== -->
@@ -40,6 +41,10 @@ and open the template in the editor.
 </head>
 <body>
 
+    <% 
+        String errorUsuario = request.getParameter("errorUsuario");
+        String errorPass = request.getParameter("errorPass");
+    %>
     <!--Menu-->
     <div class="navbar navbar-inverse navbar-static-top" style="margin-bottom:0px">
         <div class="container">
@@ -63,21 +68,34 @@ and open the template in the editor.
         </div>
     </div> 
 
-    <!--Mensaje de Bienvenida-->
-    <section class="intro">
-        <div class="container">
-            <h1>Bienvenido</h1>
-            <p>
-                La principal función de esta página es contener información detalla de cualquier articulo.
-                Estos articulos pueden ser, sipnosis de peliculas, libros, revistas, periodicos, etc. Para poder
-                ver los articulos es neceserio registrarse. De igual manera es posible que usted pueda subir 
-                articulos, siempre y cuando se ha registrado.
-            </p>
+    <!--Login-->
+    <div class="container">
+        <div class="col-md-4"></div>
+        <div class="col-md-4" id="register">
+            <form action="RegistroServlet" method="POST" class="form-signin" role="form">
+                <div class="text-center">
+                    <img id="avatar" src="./images/nadie.png" alt="avatar">
+                </div>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+                <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario">
+                <%if(errorUsuario != null){%>
+                <span><%=errorUsuario%></span>
+                <%}%>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+                <%if(errorPass != null){%>
+                <span><%=errorPass%></span>
+                <%}%>
+                <input type="password" name="password2" id="password2" class="form-control" placeholder="Repetir Password">
+                <button class="btn btn-lg btn-success btn-block" type="submit">Registrar</button>
+            </form>
         </div>
-    </section>
-	<!-- JS  -->
-	<script src="js/jquery-1.11.2.min.js"></script>
-	<script src="js/bootstrap/bootstrap.min.js"></script>
+        <div class="col-md-4"></div>
+    </div>
+
+    <!-- JS  -->
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/jquery.md5.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
 
 </body>
 </html>

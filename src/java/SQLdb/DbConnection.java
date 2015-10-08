@@ -23,13 +23,15 @@ public class DbConnection {
     Connection connection;
     
     public DbConnection(){
-        //URL ARCHIVO
-//        String userDir = System.getProperty("user.dir");
-//        String separador = System.getProperty("file.separator");
-//        String url = userDir+separador+"Files"+separador+"info.properties";
-        //String glassFish = System.getProperty("com.sun.aas.instanceRoot");
-        //Properties prop = System.getProperties();
-        //System.out.println(glassFish);
+        /*
+        URL ARCHIVO
+        String userDir = System.getProperty("user.dir");
+        String separador = System.getProperty("file.separator");
+        String url = userDir+separador+"Files"+separador+"info.properties";
+        String glassFish = System.getProperty("com.sun.aas.instanceRoot");
+        Properties prop = System.getProperties();
+        System.out.println(glassFish);*/
+        
         //Cargar credenciales.
         try{
             Properties propiedades = new Properties();
