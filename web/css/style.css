@@ -1,0 +1,38 @@
+/*Background
+------------*/
+body { 
+  	background-image: url('../images/wallpaper4.jpg');
+  	background-attachment: fixed;
+ 	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}
+
+/*Index
+-------*/
+.intro{
+	padding-top: 15px;
+	font-size: 20px;
+}
+
+/*Login & Register
+------------------*/
+form{
+    padding: 10px;
+}
+input, button{
+	margin-top: 10px;
+}
+#login, #register{
+    box-shadow: 0px 2px 10px #000000;
+	background-color: rgba(0, 0, 0, 0.5);
+	margin: 100px auto;
+	width: 320px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+#avatar {
+	padding-top: 10px;
+}

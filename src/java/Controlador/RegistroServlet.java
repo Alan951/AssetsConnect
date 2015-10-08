@@ -51,7 +51,7 @@ public class RegistroServlet extends HttpServlet {
             }
             
             if(errorFlag){
-                response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass+"&errorNombre="+errorNombre);
+                response.sendRedirect("registro.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass+"&errorNombre="+errorNombre);
             }else{
                 //UsuarioDAO
                 Usuario userReg = new Usuario(nombre, password);
