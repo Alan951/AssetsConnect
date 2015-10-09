@@ -43,10 +43,12 @@ public class RegistroServlet extends HttpServlet {
             String errorNombre = "";
 
             if(password.length() < 5 || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){ //Verificar password
-                errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
+            //    errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
+                errorPass = "110";
                 errorFlag = true;
             }if(nombre.length() < 5){
-                errorNombre = "El nombre debe de tener al menos 5 caracteres";
+             //   errorNombre = "El nombre debe de tener al menos 5 caracteres";
+                errorNombre = "120";
                 errorFlag = true;
             }
             UsuarioDAO dao = new UsuarioDAO();

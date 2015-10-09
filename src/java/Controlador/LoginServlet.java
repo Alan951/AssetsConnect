@@ -17,19 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author jorge
+ * @author Jorge Alan Villalón Pérez
  */
 public class LoginServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -43,13 +34,14 @@ public class LoginServlet extends HttpServlet {
             String errorPass = "";
 
             if(nombre.length() < 4){ //verificar username
-                errorUsuario = "El username debe de tener almenos 5 letras";
+            //    errorUsuario = "El username debe de tener almenos 5 letras";
+                errorUsuario = "110";
                 errorFlag = true;
             }if(password.length() < 5 || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){ //Verificar password
-                errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
+            //    errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
+                errorPass = "120";
                 errorFlag = true;
             }
-            
             
             if(errorFlag){
                 response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass);
