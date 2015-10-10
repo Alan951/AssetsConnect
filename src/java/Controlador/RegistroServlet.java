@@ -34,7 +34,8 @@ public class RegistroServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String nombre = request.getParameter("usuario");
+            String usuario = request.getParameter("usuario");
+            String nombre = request.getParameter("nombre");
             String password = request.getParameter("password");
             
             boolean errorFlag = false;
@@ -43,16 +44,20 @@ public class RegistroServlet extends HttpServlet {
             String errorNombre = "";
 
             if(password.length() < 5 || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){ //Verificar password
-            //    errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
+            //  errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
                 errorPass = "110";
                 errorFlag = true;
-            }if(nombre.length() < 5){
-             //   errorNombre = "El nombre debe de tener al menos 5 caracteres";
+            }if(nombre.length() < 5 || nombre.length() > 30){
+            //  errorNombre = "El nombre debe de tener al menos 5 caracteres";
                 errorNombre = "120";
                 errorFlag = true;
+            }if(usuario.length() < 4 || usuario.length() > 15){
+            //  errorUsuario = "El username debe de tener al menos 4 caracteres";
+                errorUsuario = "130";
+                errorFlag = true;
             }
-            UsuarioDAO dao = new UsuarioDAO();
             
+            UsuarioDAO dao = new UsuarioDAO();
             if(errorFlag){
                 response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass+"&errorNombre="+errorNombre);
             }
@@ -60,7 +65,7 @@ public class RegistroServlet extends HttpServlet {
                 errorUsuario = "El usuario ya existe";
                 response.sendRedirect("login.jsp?errorUsuario=Ya Existe");
             }else{
-                dao.registrarUsuario(new Usuario(nombre, password));
+                dao.registrarUsuario(new Usuario(usuario, password, nombre));
                 response.sendRedirect("login.jsp?registro=completo");
             }
         }

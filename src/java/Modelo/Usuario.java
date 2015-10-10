@@ -9,10 +9,18 @@ package Modelo;
 public class Usuario {
     private String nombre;
     private String password;
+    private String usuario;
     
     //Metodo constructor utilizado al momento de registrar un usuario
-    public Usuario(String nombre, String password){
+    public Usuario(String usuario, String password, String nombre){
         setNombre(nombre);
+        setPassword(password);
+        setUsuario(usuario);
+    }
+    
+    //Metodo constructor utilizado l momento del inicio de sesion de un usuario.
+    public Usuario(String usuario, String password){
+        setUsuario(usuario);
         setPassword(password);
     }
 
@@ -42,5 +50,13 @@ public class Usuario {
      */
     public void setPassword(String password) {
         this.password = Utilidades.Utilidades.cifrarDatos(password);
+    }
+    
+    public void setUsuario(String usuario){
+        this.usuario = usuario;
+    }
+    
+    public String getUsuario(){
+        return usuario;
     }
 }

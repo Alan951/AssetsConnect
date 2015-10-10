@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author jorge
+ * @author Jorge Alan Villalón Pérez | Puto el que lo lea.
  */
 public class UsuarioDAO {
     
@@ -21,7 +21,7 @@ public class UsuarioDAO {
         DbConnection conex = new DbConnection();
         boolean login = false;
         try{
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM `usuarios` WHERE BINARY nombre= ? AND BINARY password= ?");
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM `biblioteca`.`usuarios` WHERE BINARY Usuario= ? AND BINARY Password= ?");
             consulta.setString(1, user.getNombre());
             consulta.setString(2, user.getPassword());
             ResultSet res = consulta.executeQuery();
@@ -41,7 +41,7 @@ public class UsuarioDAO {
         DbConnection conex = new DbConnection();
         boolean existe = false;
         try{
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FORM `usuarios` WHERE BINARY nombre = ?");
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FORM `biblioteca`.`usuarios` WHERE BINARY Usuario = ?");
             consulta.setString(1, nombre);
             ResultSet res = consulta.executeQuery();
             while(res.next()){
@@ -60,7 +60,7 @@ public class UsuarioDAO {
         DbConnection conex = new DbConnection();
         try{
             Statement estatuto = conex.getConnection().createStatement();
-            estatuto.executeUpdate("INSERT INTO `usuarios` VALUES (NULL, '"+userReg.getPassword()+"', '"+userReg.getNombre()+"')");
+            estatuto.executeUpdate("INSERT INTO `biblioteca`.`usuarios` VALUES ('"+userReg.getNombre()+"', '"+userReg.getPassword()+"', '"+userReg.getNombre()+"')");
             estatuto.close();
             conex.desconectar();
             System.out.println("Se ha registrado!");
@@ -69,4 +69,43 @@ public class UsuarioDAO {
         }
     }
     
+    //Actualizar usuarios *Nombre *Contraseña
+    public void actualizarDatos(String nombreAnt, String nombre, String pass){
+        DbConnection conex = new DbConnection();
+        String setter = null;
+        if(nombre != null && pass != null) setter = "Usuario = ?, Password = ?";
+        else if(nombre != null) setter = "Usuario = ?";
+        else if(pass != null) setter = "Password = ?"; 
+        
+        String query = "UPDATE `biblioteca`.`usuarios` SET "+setter+" WHERE `Usuario` = ?";
+        
+        try{
+            PreparedStatement prep = conex.getConnection().prepareStatement(query);
+            if(nombre != null && pass != null){
+                prep.setString(1, nombre);
+                prep.setString(2, pass);
+                prep.setString(3, nombreAnt);
+            }else{
+                prep.setString(1, nombre == null ? pass : nombre);
+                prep.setString(2, nombreAnt);
+            }
+            prep.executeUpdate();
+            prep.close();
+            conex.desconectar();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void eliminarUsuario(String nombre){
+        DbConnection conex = new DbConnection();
+        try{
+            Statement estatuto = conex.getConnection().createStatement();
+            estatuto.executeUpdate("DELETE FROM `biblioteca`.`usuarios` WHERE BINARY `Usuario` = '"+nombre+"'");
+            estatuto.close();
+            conex.desconectar();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
