@@ -12,6 +12,10 @@
         <servlet-name>RegistroServlet</servlet-name>
         <servlet-class>Controlador.RegistroServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NuevoArticuloServlet</servlet-name>
+        <servlet-class>Controlador.NuevoArticuloServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Hola</servlet-name>
         <url-pattern>/Hola</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>RegistroServlet</servlet-name>
         <url-pattern>/RegistroServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NuevoArticuloServlet</servlet-name>
+        <url-pattern>/NuevoArticuloServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -47,7 +47,7 @@ public class RegistroServlet extends HttpServlet {
             //  errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
                 errorPass = "110";
                 errorFlag = true;
-            }if(nombre.length() < 5 || nombre.length() > 30){
+            }if(nombre.length() < 10 || nombre.length() > 30){
             //  errorNombre = "El nombre debe de tener al menos 5 caracteres";
                 errorNombre = "120";
                 errorFlag = true;
@@ -56,7 +56,6 @@ public class RegistroServlet extends HttpServlet {
                 errorUsuario = "130";
                 errorFlag = true;
             }
-            
             UsuarioDAO dao = new UsuarioDAO();
             if(errorFlag){
                 response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass+"&errorNombre="+errorNombre);
