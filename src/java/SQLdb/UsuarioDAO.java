@@ -60,7 +60,7 @@ public class UsuarioDAO {
         DbConnection conex = new DbConnection();
         try{
             Statement estatuto = conex.getConnection().createStatement();
-            estatuto.executeUpdate("INSERT INTO `biblioteca`.`usuarios` VALUES ('"+userReg.getUsuario()+"', '"+userReg.getPassword()+"', '"+userReg.getNombre()+"')");
+            estatuto.execute("INSERT INTO `usuarios`(`Usuario`, `Password`, `Nombre`) VALUES ('"+userReg.getUsuario()+"', '"+userReg.getPassword()+"', '"+userReg.getNombre()+"')");
             estatuto.close();
             conex.desconectar();
             System.out.println("Se ha registrado!");

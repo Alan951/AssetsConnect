@@ -47,7 +47,7 @@ public class RegistroServlet extends HttpServlet {
             //  errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
                 errorPass = "110";
                 errorFlag = true;
-            }if(nombre.length() < 10 || nombre.length() > 30){
+            }if(nombre.length() < 4 || nombre.length() > 30){
             //  errorNombre = "El nombre debe de tener al menos 5 caracteres";
                 errorNombre = "120";
                 errorFlag = true;
@@ -58,14 +58,16 @@ public class RegistroServlet extends HttpServlet {
             }
             UsuarioDAO dao = new UsuarioDAO();
             if(errorFlag){
-                response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass+"&errorNombre="+errorNombre);
-            }
-            if(dao.comprobarUsuario(usuario)){
-                errorUsuario = "El usuario ya existe";
-                response.sendRedirect("registro.jsp?errorUsuario=Ya Existe");
+                response.sendRedirect("registro.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass+"&errorNombre="+errorNombre);
             }else{
-                dao.registrarUsuario(new Usuario(usuario, password, nombre));
-                response.sendRedirect("registro.jsp?registro=completo");
+                if(dao.comprobarUsuario(usuario)){
+                    errorUsuario = "131";
+                    response.sendRedirect("registro.jsp?errorUsuario="+errorUsuario);
+                }else{
+                    dao.registrarUsuario(new Usuario(usuario, password, nombre));
+                    // reedireccionar a la pagina de info usuario --> pendiente por hacer la vista
+                    response.sendRedirect("registro.jsp?registro=completo");
+                }
             }
         }
     }

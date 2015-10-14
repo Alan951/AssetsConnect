@@ -42,6 +42,7 @@
 <body>
 
     <% 
+        String errorName = request.getParameter("errorNombre");
         String errorUsuario = request.getParameter("errorUsuario");
         String errorPass = request.getParameter("errorPass");
     %>
@@ -77,6 +78,9 @@
                     <img id="avatar" src="./images/nadie.png" alt="avatar">
                 </div>
                 <input type="text" name="name" id="name" class="form-control" placeholder="Nombre">
+                <%if(errorName != null){%>
+                <span><%=errorName%></span>
+                <%}%>
                 <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario">
                 <%if(errorUsuario != null){%>
                 <span><%=errorUsuario%></span>

@@ -13,7 +13,8 @@ $(document).ready(function () {
             },
             password:{
                 required: true,
-                passwordValid :true
+                passwordValid :true,
+                minlength:4
             },
             password2:{
                 required: true,
@@ -26,14 +27,15 @@ $(document).ready(function () {
             },
             usuario:"Requiere un minimo de 4 caracteres",
             password:{
-                required: "Requiere contraseña"
+                required: "Requiere contraseña",
+                minlength:"Requiere minimo 5 caracteres"
             },
             password2:"No coinciden las contraseñas"
         }
     });
     
     jQuery.validator.addMethod("nombreValid", function(value,element){
-        return this.optional(element) || /^(([a-zA-Z]+) ([a-zA-Z]+))*$/.test(value);
+        return this.optional(element) || /^([a-zA-Z ñáéíóú]{2,60})$/i.test(value);
     },"No debe de contener numeros o caracteres especiales");
     
     jQuery.validator.addMethod("passwordValid", function(value,element){
