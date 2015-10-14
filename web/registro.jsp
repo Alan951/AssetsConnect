@@ -33,7 +33,7 @@
     <!-- CSS
     ================================================== -->
     <link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/style.css">
 
@@ -72,11 +72,11 @@
     <div class="container">
         <div class="col-md-4"></div>
         <div class="col-md-4" id="register">
-            <form action="RegistroServlet" method="POST" class="form-signin" role="form">
+            <form action="RegistroServlet" method="POST" class="form-signin" id="form" role="form">
                 <div class="text-center">
                     <img id="avatar" src="./images/nadie.png" alt="avatar">
                 </div>
-                <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+                <input type="text" name="name" id="name" class="form-control" placeholder="Nombre">
                 <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario">
                 <%if(errorUsuario != null){%>
                 <span><%=errorUsuario%></span>
@@ -94,7 +94,8 @@
 
     <!-- JS  -->
     <script src="js/jquery-1.11.2.min.js"></script>
-    <script src="js/jquery.md5.min.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/script.js"></script>
     <script src="js/bootstrap/bootstrap.min.js"></script>
 
 </body>

@@ -1,13 +1,42 @@
 $(document).ready(function () {
-    $("#username").focus();
-    $("#username").keyup(function () {
-        var email = $(this).val();
-        var verificar_email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        var md5 = $.md5(email);
-        
-        if (verificar_email.test(email)) {
-            //$("#avatar").attr("src", 'http://www.gravatar.com/avatar.php?gravatar_id=' + md5 + '?d=mm');
-            $("#avatar").attr("src", './images/fer.jpg');
+
+    $("#form").validate({
+        rules:{
+            name:{
+                required: true,
+                nombreValid: true,
+                minlength: 10
+            },
+            usuario:{
+                required: true,
+                minlength: 4
+            },
+            password:{
+                required: true,
+                passwordValid :true
+            },
+            password2:{
+                required: true,
+                equalTo: "#password"
+            }
+        },
+        messages:{
+            name:{
+                minlength:"Requiere un minimo de 10 caracteres"
+            },
+            usuario:"Requiere un minimo de 4 caracteres",
+            password:{
+                required: "Requiere contraseña"
+            },
+            password2:"No coinciden las contraseñas"
         }
     });
+    
+    jQuery.validator.addMethod("nombreValid", function(value,element){
+        return this.optional(element) || /^(([a-zA-Z]+) ([a-zA-Z]+))*$/.test(value);
+    },"No debe de contener numeros o caracteres especiales");
+    
+    jQuery.validator.addMethod("passwordValid", function(value,element){
+        return this.optional(element) || /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$/.test(value);
+    },"La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas.mayor a 5 caracteres");
 });

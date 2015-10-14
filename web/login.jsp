@@ -72,7 +72,7 @@
     <div class="container">
         <div class="col-md-4"></div>
         <div class="col-md-4" id="login">
-            <form action="LoginServlet" method="POST" class="form-signin" role="form">
+            <form action="LoginServlet" method="POST" class="form-signin" id="form" role="form">
                 <div class="text-center">
                     <img id="avatar" src="./images/nadie.png" alt="avatar" width="80px" height="90px">
                 </div>
@@ -105,9 +105,9 @@
         </form-->
     <!-- JS  -->
     <script src="js/jquery-1.11.2.min.js"></script>
-    <script src="js/jquery.md5.min.js"></script>
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/jquery.validate.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
 
 </body>
 </html>

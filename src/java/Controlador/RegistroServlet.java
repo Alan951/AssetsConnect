@@ -35,7 +35,7 @@ public class RegistroServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String usuario = request.getParameter("usuario");
-            String nombre = request.getParameter("nombre");
+            String nombre = request.getParameter("name");
             String password = request.getParameter("password");
             
             boolean errorFlag = false;
@@ -62,10 +62,10 @@ public class RegistroServlet extends HttpServlet {
             }
             if(dao.comprobarUsuario(nombre)){
                 errorUsuario = "El usuario ya existe";
-                response.sendRedirect("login.jsp?errorUsuario=Ya Existe");
+                response.sendRedirect("registro.jsp?errorUsuario=Ya Existe");
             }else{
                 dao.registrarUsuario(new Usuario(usuario, password, nombre));
-                response.sendRedirect("login.jsp?registro=completo");
+                response.sendRedirect("registro.jsp?registro=completo");
             }
         }
     }
