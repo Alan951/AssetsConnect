@@ -22,7 +22,7 @@ public class UsuarioDAO {
         boolean login = false;
         try{
             PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM `biblioteca`.`usuarios` WHERE BINARY Usuario= ? AND BINARY Password= ?");
-            consulta.setString(1, user.getNombre());
+            consulta.setString(1, user.getUsuario());
             consulta.setString(2, user.getPassword());
             ResultSet res = consulta.executeQuery();
             while(res.next()){
@@ -41,7 +41,7 @@ public class UsuarioDAO {
         DbConnection conex = new DbConnection();
         boolean existe = false;
         try{
-            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FORM `biblioteca`.`usuarios` WHERE BINARY Usuario = ?");
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM `biblioteca`.`usuarios` WHERE BINARY Usuario = ?");
             consulta.setString(1, nombre);
             ResultSet res = consulta.executeQuery();
             while(res.next()){
@@ -60,7 +60,7 @@ public class UsuarioDAO {
         DbConnection conex = new DbConnection();
         try{
             Statement estatuto = conex.getConnection().createStatement();
-            estatuto.executeUpdate("INSERT INTO `biblioteca`.`usuarios` VALUES ('"+userReg.getNombre()+"', '"+userReg.getPassword()+"', '"+userReg.getNombre()+"')");
+            estatuto.executeUpdate("INSERT INTO `biblioteca`.`usuarios` VALUES ('"+userReg.getUsuario()+"', '"+userReg.getPassword()+"', '"+userReg.getNombre()+"')");
             estatuto.close();
             conex.desconectar();
             System.out.println("Se ha registrado!");

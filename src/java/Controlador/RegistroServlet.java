@@ -60,7 +60,7 @@ public class RegistroServlet extends HttpServlet {
             if(errorFlag){
                 response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass+"&errorNombre="+errorNombre);
             }
-            if(dao.comprobarUsuario(nombre)){
+            if(dao.comprobarUsuario(usuario)){
                 errorUsuario = "El usuario ya existe";
                 response.sendRedirect("registro.jsp?errorUsuario=Ya Existe");
             }else{

@@ -49,6 +49,7 @@ public class LoginServlet extends HttpServlet {
                 //UsuarioDAO
                 Usuario user = new Usuario(nombre, password);
                 UsuarioDAO dao = new UsuarioDAO();
+                System.out.println("Usuario: "+user.getNombre()+"\nPass: "+user.getPassword());
                 if(dao.verificarLogin(user)){
                     response.sendRedirect("bienvenida.jsp");
                     //Crear una nueva sesion abajo.
