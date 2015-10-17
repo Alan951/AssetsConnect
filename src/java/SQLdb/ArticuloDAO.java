@@ -27,4 +27,21 @@ public class ArticuloDAO {
             e.printStackTrace();
         }
     }
+    
+    public void modificarArticulo(Articulo articulo){
+        DbConnection conex = new DbConnection();
+        try{
+            PreparedStatement prep = conex.getConnection().prepareStatement("UPDATE `biblioteca`.`articulos` SET `Titulo` = ?, `Descripcion` = ?, `URL_imagen` = ?, `id_categoria` = ? WHERE `id_articulo` = ?");
+            prep.setString(1, articulo.getTitulo());
+            prep.setString(2, articulo.getDescripcion());
+            prep.setString(3, articulo.getUrl_imagen());
+            prep.setInt(4, articulo.getCategoria());
+            prep.setString(5, articulo.getIdArticulo());
+            prep.executeUpdate();
+            prep.close();
+            conex.desconectar();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
