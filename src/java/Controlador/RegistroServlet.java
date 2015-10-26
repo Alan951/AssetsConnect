@@ -66,7 +66,7 @@ public class RegistroServlet extends HttpServlet {
                 }else{
                     dao.registrarUsuario(new Usuario(usuario, password, nombre));
                     // reedireccionar a la pagina de info usuario --> pendiente por hacer la vista
-                    response.sendRedirect("registro.jsp?registro=completo");
+                    response.sendRedirect("infoUsuario.jsp?registro=completo");
                 }
             }
         }
