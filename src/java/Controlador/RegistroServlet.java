@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -65,8 +66,11 @@ public class RegistroServlet extends HttpServlet {
                     response.sendRedirect("registro.jsp?errorUsuario="+errorUsuario);
                 }else{
                     dao.registrarUsuario(new Usuario(usuario, password, nombre));
-                    // reedireccionar a la pagina de info usuario --> pendiente por hacer la vista
-                    response.sendRedirect("infoUsuario.jsp?registro=completo");
+                    //response.sendRedirect("infoUsuario.jsp?registro=completo");
+                    HttpSession sesion = request.getSession();
+                    sesion.setAttribute("usuario", usuario);
+  
+                    response.sendRedirect("principal.jsp");
                 }
             }
         }
