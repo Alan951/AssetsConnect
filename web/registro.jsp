@@ -62,8 +62,7 @@
             </div>
             <div class="collapse navbar-collapse" id="navHeader">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.jsp">Login</a></li>
-                    <li><a href="registro.jsp">Registro</a></li>
+                    <li><a href="login.jsp"><span class="glyphicon glyphicon-user"></span> Login</a></li>
                 </ul>
             </div>
         </div>
@@ -74,9 +73,9 @@
         <div class="col-md-4"></div>
         <div class="col-md-4" id="register">
             <form action="RegistroServlet" method="POST" class="form-signin" id="form" role="form">
-                <div class="text-center">
+                <!--div class="text-center">
                     <img id="avatar" src="./images/nadie.png" alt="avatar">
-                </div>
+                </div-->
                 <input type="text" name="name" id="name" class="form-control" placeholder="Nombre">
                 <%if(errorName != null){%>
                 <span><%=errorName%></span>

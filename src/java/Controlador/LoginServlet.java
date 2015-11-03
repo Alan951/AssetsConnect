@@ -14,47 +14,58 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Jorge Alan Villalón Pérez
  */
 public class LoginServlet extends HttpServlet {
+    private HttpSession sesion;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String nombre = request.getParameter("usuario");
-            String password = request.getParameter("password");
-
-            boolean errorFlag = false;
-            String errorUsuario = "";
-            String errorPass = "";
-
-            if(nombre.length() < 4){ //verificar username
-            //    errorUsuario = "El username debe de tener almenos 5 letras";
-                errorUsuario = "110";
-                errorFlag = true;
-            }if(password.length() < 5 || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){ //Verificar password
-            //    errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
-                errorPass = "120";
-                errorFlag = true;
-            }
+            String accion = request.getParameter("accion");
             
-            if(errorFlag){
-                response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass);
-            }else{
-                //UsuarioDAO
-                Usuario user = new Usuario(nombre, password);
-                UsuarioDAO dao = new UsuarioDAO();
-                System.out.println("Usuario: "+user.getNombre()+"\nPass: "+user.getPassword());
-                if(dao.verificarLogin(user)){
-                    response.sendRedirect("bienvenida.jsp");
-                    //Crear una nueva sesion abajo.
+            if(accion.equals("cerrar")){
+                sesion.invalidate();
+            }
+                        
+            if(accion.equals("loggin")){
+                String nombre = request.getParameter("usuario");
+                String password = request.getParameter("password");
+
+                boolean errorFlag = false;
+                String errorUsuario = "";
+                String errorPass = "";
+
+                if(nombre.length() < 4){ //verificar username
+                //    errorUsuario = "El username debe de tener almenos 5 letras";
+                    errorUsuario = "110";
+                    errorFlag = true;
+                }if(password.length() < 5 || !password.matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$")){ //Verificar password
+                //    errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas";
+                    errorPass = "120";
+                    errorFlag = true;
+                }
+
+                if(errorFlag){
+                    response.sendRedirect("login.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass);
                 }else{
-                    response.sendRedirect("login.jsp?login=loginFail");
+                    //UsuarioDAO
+                    Usuario user = new Usuario(nombre, password);
+                    UsuarioDAO dao = new UsuarioDAO();
+                    System.out.println("Usuario: "+user.getNombre()+"\nPass: "+user.getPassword());
+                    if(dao.verificarLogin(user)){
+                        sesion = request.getSession();
+                        sesion.setAttribute("usuario", nombre);
+                        response.sendRedirect("principal.jsp");
+                    }else{
+                        response.sendRedirect("login.jsp?login=loginFail");
+                    }
                 }
             }
         }

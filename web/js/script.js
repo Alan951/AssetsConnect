@@ -41,4 +41,17 @@ $(document).ready(function () {
     jQuery.validator.addMethod("passwordValid", function(value,element){
         return this.optional(element) || /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$/.test(value);
     },"La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas.mayor a 5 caracteres");
+
+
+    $("#cerrar").click(function(){
+     cerrar(); return false;
+    });
+    
+    function cerrar(){
+        $.post("LoginServlet",{
+            accion:"cerrar",
+        }, function(responseText){
+            $(location).attr('href',"index.html"); 
+        });
+    }
 });

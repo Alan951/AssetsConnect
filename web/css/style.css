@@ -21,17 +21,17 @@ body {
 form{
     padding: 10px;
 }
-input, button{
+input, button, textarea, select{
 	margin-top: 10px;
 }
 #login, #register{
     box-shadow: 0px 2px 10px #000000;
-	background-color: rgba(0, 0, 0, 0.5);
-	margin: 100px auto;
-	width: 320px;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 100px auto;
+    width: 320px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
 }
 #avatar {
 	padding-top: 10px;
@@ -51,3 +51,24 @@ span{
 
 /*Principal
 ------------*/
+.icongrey{
+    color: grey;
+}
+.iconyellow{
+    color: burlywood;
+}
+.iconred{
+    color: red;
+}
+
+/*Nuevo Articulo
+----------------*/
+#newArticulo{
+    box-shadow: 0px 2px 10px #000000;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 100px auto;
+    width: 420px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}

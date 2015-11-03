@@ -33,8 +33,6 @@
         <url-pattern>/NuevoArticuloServlet</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
+        <session-timeout>20</session-timeout>
     </session-config>
 </web-app>

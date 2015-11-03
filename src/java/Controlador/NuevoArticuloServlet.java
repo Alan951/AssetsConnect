@@ -36,10 +36,10 @@ public class NuevoArticuloServlet extends HttpServlet {
             String usuario = null;
             //<-
             titulo = request.getParameter("titulo");
-            descripcion = request.getParameter("categoria");
+            descripcion = request.getParameter("descripcion");
             categoria = Integer.parseInt(request.getParameter("categoria"));
             url_imagen = request.getParameter("url");
-            idArticulo = request.getParameter("id");
+            idArticulo = request.getParameter("clave");
             usuario = (String)sesion.getAttribute("usuario");
             
             if(url_imagen.equals("")){
