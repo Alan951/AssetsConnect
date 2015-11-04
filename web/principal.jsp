@@ -84,7 +84,14 @@ and open the template in the editor.
     <!--Articulos-->
     <section class="articulos">
         <div class="container">
-            
+            <%
+                    Cookie allCookie[] = request.getCookies();
+                    for(Cookie temp: allCookie){
+                        System.out.println(temp.getName());
+                        System.out.println(temp.getValue());
+                    }
+                    
+            %>
         </div>
     </section>
 	<!-- JS  -->

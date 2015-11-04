@@ -99,15 +99,15 @@ and open the template in the editor.
                     <option>5</option>
                 </select>
                 <input type="text" name="url" id="url" class="form-control" placeholder="URL">
-
-                    <div class="col-xs-5">
+                <div class="container">
+                    <div class="col-xs-5 col-sm-2 col-md-2 col-lg-2">
                         <button class="btn btn-lg btn-danger btn-block" type="submit" id="eliminar">Eliminar</button>
                     </div>
-                    <div class="col-xs-7">
-                        <button class="btn btn-lg btn-success btn-block col-lg-4" type="submit" id="modificar">Guardar Cambios</button>
+                    <div class="col-xs-7 col-sm-4 col-md-3 col-lg-3">
+                        <button class="btn btn-lg btn-success btn-block" type="submit" id="modificar">Guardar Cambios</button>
                 
                     </div>
-
+                </div>
                 <input hidden name="accion" value="detallesArticulo"/>
             </form>
         </div>
