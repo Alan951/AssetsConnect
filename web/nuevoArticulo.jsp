@@ -89,7 +89,7 @@ and open the template in the editor.
 
                 <input type="text" name="clave" id="Clave" class="form-control" placeholder="Clave">
                 <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo">
-                <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripción"></textarea> 
+                <textarea class="form-control" rows="5"  resize="vertical" name="descripcion" id="descripcion" placeholder="Descripción"></textarea> 
                 <select class="form-control" name="categoria">
                     <option>Categoria</option>
                     <option>1</option>

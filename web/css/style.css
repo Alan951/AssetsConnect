@@ -61,7 +61,7 @@ span{
     color: red;
 }
 
-/*Nuevo Articulo
+/*Nuevo Articulo & Detalle Articulo
 ----------------*/
 #newArticulo{
     box-shadow: 0px 2px 10px #000000;
@@ -73,8 +73,6 @@ span{
     -moz-border-radius: 4px;
 }
 
-/*Detalle Articulo
------------------*/
 #clave{
     text-align: center;
     padding-left: 5px;
@@ -83,6 +81,11 @@ span{
     font-weight: bold;
 }
 
-.botones{
-    padding-left: 0px;
+#Clave-error, #titulo-error, #descripcion-error,span{
+    font-size: 12px;
+    color: #ccc;
+}
+
+textarea{
+    resize: none;
 }

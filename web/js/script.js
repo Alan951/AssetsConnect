@@ -43,6 +43,42 @@ $(document).ready(function () {
     },"La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas.mayor a 5 caracteres");
 
 
+    $("#formArticulo").validate({
+        rules:{
+            clave:{
+                required: true,
+                stringValid: true
+            },
+            titulo:{
+                required: true,
+                stringValid: true
+            },
+            descripcion:{
+                required: true,
+                descripcionValid: true
+            },
+        },
+        messages:{
+            clave:{
+                required:"No puede estar vacío"
+            },
+            titulo:{
+                required:"No puede estar vacío"
+            },
+            descripcion:{
+                required:"No puede estar vacío"
+            },
+        }
+    });
+    
+    jQuery.validator.addMethod("stringValid", function(value,element){
+        return this.optional(element) || /^([a-zA-Z 0-9 ñáéíóú]{2,60})$/i.test(value);
+    },"Solo numeros y letras");
+    
+    jQuery.validator.addMethod("descripcionValid", function(value,element){
+        return this.optional(element) || /^([a-zA-Z 0-9 ñáéíóú \. \, \; \( \) \ \n"]{2,60})$/i.test(value);
+    },"No puede contener caracteres especiales. Excepto: . , ; ( ) \"");
+    
     $("#cerrar").click(function(){
      cerrar(); return false;
     });

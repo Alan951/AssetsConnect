@@ -87,7 +87,7 @@ and open the template in the editor.
         <div class="col-md-4"></div>
         <div class="col-md-4" id="newArticulo">
             <form class="form-signin" id="formArticulo" role="formArticulo">
-                <div type="text" name="clave" id="clave">Clave: <div id="clave1"><%=id_articulo%></div></div>
+                <div type="text" name="clave" id="clave">Clave: <b id="clave1"><%=id_articulo%></b></div>
                 <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo">
                 <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripción"></textarea> 
                 <select class="form-control" name="categoria" id="categoria">
