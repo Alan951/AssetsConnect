@@ -4,6 +4,7 @@ import Modelo.Articulo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -77,5 +78,25 @@ public class ArticuloDAO {
             e.printStackTrace();
         }
         return existe;
+    }
+    
+    public ArrayList<Articulo> getArticulos(String nombre){
+        DbConnection conex = new DbConnection();
+        ResultSet result = null;
+        ArrayList<Articulo> articulos = new ArrayList<Articulo>();
+        try{
+            PreparedStatement prep = conex.getConnection().prepareStatement("SELECT * FROM `biblioteca`.`articulos` WHERE BINARY `Usuario` = ?");
+            prep.setString(1, nombre);
+            result = prep.executeQuery();
+            while(result.next()){
+               articulos.add(new Articulo(result.getString("Titulo"), result.getString("Descripcion"), result.getInt("id_categoria"), result.getString("URL_imagen"), result.getString("id_articulo"), result.getString("Usuario")));
+            }
+            result.close();
+            prep.close();
+            conex.desconectar();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return articulos;
     }
 }

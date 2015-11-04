@@ -7,10 +7,13 @@ package Controlador;
  */
 
 import Modelo.Usuario;
+import SQLdb.ArticuloDAO;
 import SQLdb.UsuarioDAO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,10 +63,13 @@ public class LoginServlet extends HttpServlet {
                     UsuarioDAO dao = new UsuarioDAO();
                     System.out.println("Usuario: "+user.getNombre()+"\nPass: "+user.getPassword());
                     if(dao.verificarLogin(user)){
-                        //Crear Cookies de los articulos.
-                        
                         sesion = request.getSession();
                         sesion.setAttribute("usuario", nombre);
+                        //Traer articulos
+                        ArticuloDAO artDAO = new ArticuloDAO();
+                        String json = new Gson().toJson(artDAO.getArticulos(nombre));
+                        Cookie cookie = new Cookie("Articulos", json);
+                        response.addCookie(cookie);
                         response.sendRedirect("principal.jsp");
                     }else{
                         response.sendRedirect("login.jsp?login=loginFail");
