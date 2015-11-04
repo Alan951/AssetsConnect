@@ -56,7 +56,6 @@ $(document).ready(function () {
     }
     
     $("#eliminar").click(function(){
-        console.log(1);
         $.post("NuevoArticuloServlet",{
             //accion:"detallesArticulo",
             accion2:"eliminar",
@@ -65,11 +64,21 @@ $(document).ready(function () {
         });
     });
     
+    var clave1 = $("#clave1").text();
+    var titulo1 = $("#titulo").val();
+    var descripcion1 = $("#descripcion").val();
+    var categoria1 = $("#categoria").val();
+    var url1 = $("#url").val();
+    
     $("#modificar").click(function(){
-        console.log(2);
         $.post("NuevoArticuloServlet",{
-            //accion:"detallesArticulo",
+            accion:"detallesArticulo",
             accion2:"modificar",
+            clave: clave1,
+            titulo: titulo1,
+            descripcion: descripcion1,
+            categoria: categoria1,
+            url: url1
         }, function(responseText){
             //$(location).attr('href',"index.html"); 
         });

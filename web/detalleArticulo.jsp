@@ -58,6 +58,7 @@ and open the template in the editor.
                 <ul class="nav navbar-nav navbar-right">
                 <%
                     String usuario = (String)session.getAttribute("usuario");
+                    String id_articulo = request.getParameter("idArticulo");
                     
                     if(usuario == null){
                         response.sendRedirect("index.html");
@@ -85,12 +86,11 @@ and open the template in the editor.
     <div class="container">
         <div class="col-md-4"></div>
         <div class="col-md-4" id="newArticulo">
-            <form action="NuevoArticuloServlet" method="POST" class="form-signin" id="formArticulo" role="formArticulo">
-
-                <div type="text" name="clave" id="clave">Clave: 123</div>
+            <form class="form-signin" id="formArticulo" role="formArticulo">
+                <div type="text" name="clave" id="clave">Clave: <div id="clave1"><%=id_articulo%></div></div>
                 <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo">
                 <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripción"></textarea> 
-                <select class="form-control" name="categoria">
+                <select class="form-control" name="categoria" id="categoria">
                     <option>Categoria</option>
                     <option>1</option>
                     <option>2</option>
