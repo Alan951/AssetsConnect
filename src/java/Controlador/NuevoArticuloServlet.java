@@ -41,6 +41,7 @@ public class NuevoArticuloServlet extends HttpServlet {
 
             String accion = request.getParameter("accion");
             String accion2 = request.getParameter("accion2");
+            
 
             if (accion.equals("newArticulo")) {
                 titulo = request.getParameter("titulo");
@@ -48,6 +49,9 @@ public class NuevoArticuloServlet extends HttpServlet {
                 categoria = Integer.parseInt(request.getParameter("categoria"));
                 url_imagen = request.getParameter("url");
                 idArticulo = request.getParameter("clave");
+                
+                //Comprobacion de datos
+                
                 
                 if (url_imagen.equals("")) {
                     url_imagen = "images/ArticuloDefault.jpg";
