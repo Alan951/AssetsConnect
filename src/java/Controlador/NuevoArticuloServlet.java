@@ -63,21 +63,21 @@ public class NuevoArticuloServlet extends HttpServlet {
                 }
             } else if (accion.equals("detallesArticulo")) {//    case "detallesArticulo":
                 if (accion2.equals("modificar")) {
+                    idArticulo = request.getParameter("clave");
                     titulo = request.getParameter("titulo");
                     descripcion = request.getParameter("descripcion");
                     categoria = Integer.parseInt(request.getParameter("categoria"));
                     url_imagen = request.getParameter("url");
-                    idArticulo = request.getParameter("clave");
                     usuario = (String) sesion.getAttribute("usuario");
 
                     Articulo articuloMod = new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario);
 
                     ArticuloDAO daoMod = new ArticuloDAO();
-                    daoMod.registrarArticulo(articuloMod);
+                    daoMod.modificarArticulo(articuloMod);
                     if (url_imagen.equals("")) {
                         url_imagen = "images/ArticuloDefault.jpg";
                     }
-                    response.sendRedirect("principal.jsp");
+                    
                 } else if ("accion2".equals("eliminar")) {
                     idArticulo = request.getParameter("clave");
                     ArticuloDAO artDao = new ArticuloDAO();

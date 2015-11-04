@@ -92,11 +92,9 @@ and open the template in the editor.
                 <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripción"></textarea> 
                 <select class="form-control" name="categoria" id="categoria">
                     <option>Categoria</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
                 </select>
                 <input type="text" name="url" id="url" class="form-control" placeholder="URL">
                 <div class="container">

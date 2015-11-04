@@ -64,13 +64,14 @@ $(document).ready(function () {
         });
     });
     
-    var clave1 = $("#clave1").text();
-    var titulo1 = $("#titulo").val();
-    var descripcion1 = $("#descripcion").val();
-    var categoria1 = $("#categoria").val();
-    var url1 = $("#url").val();
-    
     $("#modificar").click(function(){
+        
+        var clave1 = $("#clave1").text();
+        var titulo1 = $("#titulo").val();
+        var descripcion1 = $("#descripcion").val();
+        var categoria1 = $("#categoria").val();
+        var url1 = $("#url").val();
+    
         $.post("NuevoArticuloServlet",{
             accion:"detallesArticulo",
             accion2:"modificar",
@@ -80,7 +81,7 @@ $(document).ready(function () {
             categoria: categoria1,
             url: url1
         }, function(responseText){
-            //$(location).attr('href',"index.html"); 
+            $(location).attr('href',"principal.jsp"); 
         });
     });
 });
