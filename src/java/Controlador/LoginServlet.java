@@ -66,10 +66,7 @@ public class LoginServlet extends HttpServlet {
                         sesion = request.getSession();
                         sesion.setAttribute("usuario", nombre);
                         //Traer articulos
-                        ArticuloDAO artDAO = new ArticuloDAO();
-                        String json = new Gson().toJson(artDAO.getArticulos(nombre));
-                        Cookie cookie = new Cookie("Articulos", json);
-                        response.addCookie(cookie);
+                        response.addCookie(Utilidades.Utilidades.recargarCookie(nombre));
                         response.sendRedirect("principal.jsp");
                     }else{
                         response.sendRedirect("login.jsp?login=loginFail");

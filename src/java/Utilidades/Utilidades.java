@@ -5,8 +5,11 @@
  */
 package Utilidades;
 
+import SQLdb.ArticuloDAO;
+import com.google.gson.Gson;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.servlet.http.Cookie;
 
 /**
  *
@@ -41,5 +44,13 @@ public class Utilidades {
             hash += Integer.toHexString(b);
         }
         return hash;
+    }
+    
+    public static Cookie recargarCookie(String usuario){
+        ArticuloDAO artDAO = new ArticuloDAO();
+        String json = new Gson().toJson(artDAO.getArticulos(usuario));
+        System.out.println("JSON: "+json);
+        Cookie cookie = new Cookie("Articulos", json);
+        return cookie;
     }
 }
