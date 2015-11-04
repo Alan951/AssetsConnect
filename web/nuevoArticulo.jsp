@@ -85,9 +85,9 @@ and open the template in the editor.
     <div class="container">
         <div class="col-md-4"></div>
         <div class="col-md-4" id="newArticulo">
-            <form action="NuevoArticuloServlet" method="POST" class="form-signin" id="form" role="form">
+            <form action="NuevoArticuloServlet" method="POST" class="form-signin" id="formArticulo" role="formArticulo">
 
-                <input type="text" name="clave" id="clave" class="form-control" placeholder="Clave">
+                <input type="text" name="clave" id="Clave" class="form-control" placeholder="Clave">
                 <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo">
                 <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripción"></textarea> 
                 <select class="form-control" name="categoria">
@@ -100,6 +100,7 @@ and open the template in the editor.
                 </select>
                 <input type="text" name="url" id="url" class="form-control" placeholder="URL">
                 <button class="btn btn-lg btn-success btn-block" type="submit">Guardar</button>
+                <input hidden name="accion" value="newArticulo"/>
             </form>
         </div>
         <div class="col-md-4"></div>

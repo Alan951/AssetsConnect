@@ -60,6 +60,8 @@ public class LoginServlet extends HttpServlet {
                     UsuarioDAO dao = new UsuarioDAO();
                     System.out.println("Usuario: "+user.getNombre()+"\nPass: "+user.getPassword());
                     if(dao.verificarLogin(user)){
+                        //Crear Cookies de los articulos.
+                        
                         sesion = request.getSession();
                         sesion.setAttribute("usuario", nombre);
                         response.sendRedirect("principal.jsp");

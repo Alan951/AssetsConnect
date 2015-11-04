@@ -54,4 +54,24 @@ $(document).ready(function () {
             $(location).attr('href',"index.html"); 
         });
     }
+    
+    $("#eliminar").click(function(){
+        console.log(1);
+        $.post("NuevoArticuloServlet",{
+            //accion:"detallesArticulo",
+            accion2:"eliminar",
+        }, function(responseText){
+            //$(location).attr('href',"index.html"); 
+        });
+    });
+    
+    $("#modificar").click(function(){
+        console.log(2);
+        $.post("NuevoArticuloServlet",{
+            //accion:"detallesArticulo",
+            accion2:"modificar",
+        }, function(responseText){
+            //$(location).attr('href',"index.html"); 
+        });
+    });
 });

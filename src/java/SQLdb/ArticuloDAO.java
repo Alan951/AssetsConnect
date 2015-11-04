@@ -2,6 +2,7 @@ package SQLdb;
 
 import Modelo.Articulo;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -43,5 +44,38 @@ public class ArticuloDAO {
         }catch(SQLException e){
             e.printStackTrace();
         }
+    }
+    
+    public void eliminarArticulo(String id){
+        DbConnection conex = new DbConnection();
+        try{
+            PreparedStatement prep = conex.getConnection().prepareStatement("DELETE FROM `biblioteca`.`articulos` WHERE BINARY `id_articulo` = ?");
+            prep.setString(1, id);
+            prep.executeQuery();
+            prep.close();
+            conex.desconectar();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public boolean verificarArticulo(String id){
+        DbConnection conex = new DbConnection();
+        ResultSet result = null;
+        boolean existe = false;
+        try{
+            PreparedStatement prep = conex.getConnection().prepareStatement("SELECT * FROM `biblioteca`.`articulos` WHERE BINARY `id_articulo` = ?");
+            prep.setString(1, id);
+            result = prep.executeQuery();
+            while(result.next()){
+                existe = true;
+            }
+            result.close();
+            prep.close();
+            conex.desconectar();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return existe;
     }
 }

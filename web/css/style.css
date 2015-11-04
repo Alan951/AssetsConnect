@@ -72,3 +72,17 @@ span{
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
 }
+
+/*Detalle Articulo
+-----------------*/
+#clave{
+    text-align: center;
+    padding-left: 5px;
+    font-size: 20px;
+    color: #e6e6e6;
+    font-weight: bold;
+}
+
+.botones{
+    padding-left: 0px;
+}

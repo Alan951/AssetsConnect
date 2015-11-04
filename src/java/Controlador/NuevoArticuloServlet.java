@@ -27,29 +27,73 @@ public class NuevoArticuloServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession sesion = request.getSession();
 
-            //Declaracion de variables
             String titulo = null;
             String descripcion = null;
             int categoria = 0;
             String url_imagen = null;
             String idArticulo = null;
             String usuario = null;
-            //<-
-            titulo = request.getParameter("titulo");
-            descripcion = request.getParameter("descripcion");
-            categoria = Integer.parseInt(request.getParameter("categoria"));
-            url_imagen = request.getParameter("url");
-            idArticulo = request.getParameter("clave");
-            usuario = (String)sesion.getAttribute("usuario");
-            
-            if(url_imagen.equals("")){
-                url_imagen = "images/ArticuloDefault.jpg";
+
+            String accion = request.getParameter("accion");
+            String accion2 = request.getParameter("accion2");
+            //switch (accion) {
+                //case "newArticulo":
+            if(accion.equals("newArticulo")){
+                    //Declaracion de variables
+                    titulo = request.getParameter("titulo");
+                    descripcion = request.getParameter("descripcion");
+                    categoria = Integer.parseInt(request.getParameter("categoria"));
+                    url_imagen = request.getParameter("url");
+                    idArticulo = request.getParameter("clave");
+                    usuario = (String) sesion.getAttribute("usuario");
+                    
+                    
+                    
+                    if (url_imagen.equals("")) {
+                        url_imagen = "images/ArticuloDefault.jpg";
+                    }
+
+                    Articulo articulo = new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario);
+
+                    ArticuloDAO dao = new ArticuloDAO();
+                    
+                    if(dao.verificarArticulo(idArticulo)){
+                        //Enviar valores. No reescribir.
+                        response.sendRedirect("nuevoArticulo.jsp?error=200");
+                    }else{
+                        dao.registrarArticulo(articulo);
+                        //Reedireccionar a detalles del articulo
+                        response.sendRedirect("detalleArticulo.jsp");
+                    }
+                    
+                    
+                    //break;
+            }else if(accion.equals("detallesArticulo")){//    case "detallesArticulo":
+                    
+                    if (accion2.equals("modificar")) {
+                        titulo = request.getParameter("titulo");
+                        descripcion = request.getParameter("descripcion");
+                        categoria = Integer.parseInt(request.getParameter("categoria"));
+                        url_imagen = request.getParameter("url");
+                        idArticulo = request.getParameter("clave");
+                        usuario = (String) sesion.getAttribute("usuario");
+
+                        Articulo articuloMod = new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario);
+
+                        ArticuloDAO daoMod = new ArticuloDAO();
+                        daoMod.registrarArticulo(articuloMod);
+                        if (url_imagen.equals("")) {
+                            url_imagen = "images/ArticuloDefault.jpg";
+                        }
+                    } else if ("accion2".equals("eliminar")) {
+                        idArticulo = request.getParameter("clave");
+                        ArticuloDAO artDao = new ArticuloDAO();
+                        artDao.eliminarArticulo(idArticulo);
+                        response.sendRedirect("parincipal.jsp");
+                    }
+            //        break;
             }
-            
-            Articulo articulo = new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario);
-            
-            ArticuloDAO dao = new ArticuloDAO();
-            dao.registrarArticulo(articulo);
+
         }
     }
 

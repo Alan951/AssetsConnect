@@ -68,7 +68,7 @@ and open the template in the editor.
                         <ul class="dropdown-menu">
                             <li><a href="#"><span class="glyphicon glyphicon-cog icongrey" aria-hidden="true"></span>&nbsp;Información</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="nuevoArticulo.jsp"><span class="glyphicon glyphicon-folder-open iconyellow" aria-hidden="true"></span>&nbsp;Nuevo Articulo</a></li>
+                            <li><a href="registrarArticulo.jsp"><span class="glyphicon glyphicon-folder-open iconyellow" aria-hidden="true"></span>&nbsp;Nuevo Articulo</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#" id="cerrar"><span class="glyphicon glyphicon-remove iconred"></span>&nbsp;Cerrar</a></li>
                         </ul>
@@ -81,12 +81,38 @@ and open the template in the editor.
         </div>
     </div> 
 
-    <!--Articulos-->
-    <section class="articulos">
-        <div class="container">
-            
+    <!--Nuevo Articulo-->
+    <div class="container">
+        <div class="col-md-4"></div>
+        <div class="col-md-4" id="newArticulo">
+            <form action="NuevoArticuloServlet" method="POST" class="form-signin" id="formArticulo" role="formArticulo">
+
+                <div type="text" name="clave" id="clave">Clave: 123</div>
+                <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo">
+                <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripción"></textarea> 
+                <select class="form-control" name="categoria">
+                    <option>Categoria</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <input type="text" name="url" id="url" class="form-control" placeholder="URL">
+
+                    <div class="col-xs-5">
+                        <button class="btn btn-lg btn-danger btn-block" type="submit" id="eliminar">Eliminar</button>
+                    </div>
+                    <div class="col-xs-7">
+                        <button class="btn btn-lg btn-success btn-block col-lg-4" type="submit" id="modificar">Guardar Cambios</button>
+                
+                    </div>
+
+                <input hidden name="accion" value="detallesArticulo"/>
+            </form>
         </div>
-    </section>
+        <div class="col-md-4"></div>
+    </div>
 	<!-- JS  -->
 	<script src="js/jquery-1.11.2.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>
