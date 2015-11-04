@@ -56,16 +56,26 @@ $(document).ready(function () {
     }
     
     $("#eliminar").click(function(){
-        $.post("NuevoArticuloServlet",{
-            //accion:"detallesArticulo",
-            accion2:"eliminar",
-        }, function(responseText){
-            //$(location).attr('href',"index.html"); 
-        });
+        eliminarArticulo(); return false;
     });
     
-    $("#modificar").click(function(){
+    function eliminarArticulo(){
+        var clave1 = $("#clave1").text();
         
+        $.post("NuevoArticuloServlet",{
+            accion:"detallesArticulo",
+            accion2:"eliminar",
+            clave: clave1
+        }, function(responseText){
+            $(location).attr('href',"principal.jsp"); 
+        });
+    }
+    
+    $("#modificar").click(function(){
+        modificarArticulo(); return false;
+    });
+    
+    function modificarArticulo(){
         var clave1 = $("#clave1").text();
         var titulo1 = $("#titulo").val();
         var descripcion1 = $("#descripcion").val();
@@ -81,7 +91,9 @@ $(document).ready(function () {
             categoria: categoria1,
             url: url1
         }, function(responseText){
+            alert(responseText);
             $(location).attr('href',"principal.jsp"); 
         });
-    });
+        
+    }
 });

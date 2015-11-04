@@ -78,11 +78,13 @@ public class NuevoArticuloServlet extends HttpServlet {
                         url_imagen = "images/ArticuloDefault.jpg";
                     }
                     
-                } else if ("accion2".equals("eliminar")) {
+                } else if (accion2.equals("eliminar")) {
                     idArticulo = request.getParameter("clave");
+                    usuario = (String) sesion.getAttribute("usuario");
+                    
                     ArticuloDAO artDao = new ArticuloDAO();
-                    artDao.eliminarArticulo(idArticulo);
-                    response.sendRedirect("parincipal.jsp");
+                    
+                    artDao.eliminarArticulo(idArticulo,usuario);
                 }
             }
 

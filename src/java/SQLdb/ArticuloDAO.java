@@ -47,11 +47,12 @@ public class ArticuloDAO {
         }
     }
     
-    public void eliminarArticulo(String id){
+    public void eliminarArticulo(String id, String usuario){
         DbConnection conex = new DbConnection();
         try{
-            PreparedStatement prep = conex.getConnection().prepareStatement("DELETE FROM `biblioteca`.`articulos` WHERE BINARY `id_articulo` = ?");
+            PreparedStatement prep = conex.getConnection().prepareStatement("DELETE FROM `biblioteca`.`articulos` WHERE `id_articulo` = ? and `Usuario` = ?");
             prep.setString(1, id);
+            prep.setString(2, usuario);
             prep.executeQuery();
             prep.close();
             conex.desconectar();
