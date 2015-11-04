@@ -89,6 +89,7 @@ public class ArticuloDAO {
             prep.setString(1, nombre);
             result = prep.executeQuery();
             while(result.next()){
+                System.out.println(1);
                articulos.add(new Articulo(result.getString("Titulo"), result.getString("Descripcion"), result.getInt("id_categoria"), result.getString("URL_imagen"), result.getString("id_articulo"), result.getString("Usuario")));
             }
             result.close();
