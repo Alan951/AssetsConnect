@@ -59,7 +59,7 @@ public class NuevoArticuloServlet extends HttpServlet {
                 } else {
                     dao.registrarArticulo(articulo);
                     //Reedireccionar a detalles del articulo
-                    response.sendRedirect("detalleArticulo.jsp");
+                    response.sendRedirect("detalleArticulo.jsp?idArticulo="+idArticulo);
                 }
             } else if (accion.equals("detallesArticulo")) {//    case "detallesArticulo":
                 if (accion2.equals("modificar")) {
