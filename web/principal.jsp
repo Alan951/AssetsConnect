@@ -86,9 +86,11 @@ and open the template in the editor.
         <div class="container">
             <%
                     Cookie allCookie[] = request.getCookies();
+                    Cookie articulos = null;
                     for(Cookie temp: allCookie){
-                        System.out.println(temp.getName());
-                        System.out.println(temp.getValue());
+                        if(temp.getName().equals("Articulos")){
+                            articulos = temp;
+                        }
                     }
                     
             %>

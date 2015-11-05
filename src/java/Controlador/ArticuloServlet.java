@@ -7,13 +7,16 @@ package Controlador;
 
 import Modelo.Articulo;
 import SQLdb.ArticuloDAO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import Utilidades.Utilidades;
 
 /**
  *
@@ -26,16 +29,19 @@ public class NuevoArticuloServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession sesion = request.getSession();
-
+            Cookie cookie = null;
+            
+            
             String titulo = null;
             String descripcion = null;
             int categoria = 0;
             String url_imagen = null;
             String idArticulo = null;
-            String usuario = null;
+            String usuario = usuario = (String) sesion.getAttribute("usuario");
 
             String accion = request.getParameter("accion");
             String accion2 = request.getParameter("accion2");
+            
 
             if (accion.equals("newArticulo")) {
                 titulo = request.getParameter("titulo");
@@ -43,8 +49,10 @@ public class NuevoArticuloServlet extends HttpServlet {
                 categoria = Integer.parseInt(request.getParameter("categoria"));
                 url_imagen = request.getParameter("url");
                 idArticulo = request.getParameter("clave");
-                usuario = (String) sesion.getAttribute("usuario");
-
+                
+                //Comprobacion de datos
+                
+                
                 if (url_imagen.equals("")) {
                     url_imagen = "images/ArticuloDefault.jpg";
                 }
@@ -58,6 +66,14 @@ public class NuevoArticuloServlet extends HttpServlet {
                     response.sendRedirect("nuevoArticulo.jsp?error=200");
                 } else {
                     dao.registrarArticulo(articulo);
+                    
+                    //Recargar Cookies                 
+                    /*ArticuloDAO artDAO = new ArticuloDAO();
+                    String json = new Gson().toJson(artDAO.getArticulos(usuario));
+                    System.out.println("JSON Registro: "+json);
+                    cookie = new Cookie("Articulos", json);*/
+                    response.addCookie(Utilidades.recargarCookie(usuario));
+
                     //Reedireccionar a detalles del articulo
                     response.sendRedirect("detalleArticulo.jsp?idArticulo="+idArticulo);
                 }
@@ -77,7 +93,12 @@ public class NuevoArticuloServlet extends HttpServlet {
                     if (url_imagen.equals("")) {
                         url_imagen = "images/ArticuloDefault.jpg";
                     }
-                    
+                    //Recargar Cookies                 
+                    /*ArticuloDAO artDAO = new ArticuloDAO();
+                    String json = new Gson().toJson(artDAO.getArticulos(usuario));
+                    System.out.println("JSON Registro: "+json);
+                    cookie = new Cookie("Articulos", json);*/
+                    response.addCookie(Utilidades.recargarCookie(usuario));
                 } else if (accion2.equals("eliminar")) {
                     idArticulo = request.getParameter("clave");
                     usuario = (String) sesion.getAttribute("usuario");
@@ -85,6 +106,12 @@ public class NuevoArticuloServlet extends HttpServlet {
                     ArticuloDAO artDao = new ArticuloDAO();
                     
                     artDao.eliminarArticulo(idArticulo,usuario);
+                    //Recargar Cookies                 
+                    /*ArticuloDAO artDAO = new ArticuloDAO();
+                    String json = new Gson().toJson(artDAO.getArticulos(usuario));
+                    System.out.println("JSON Registro: "+json);
+                    cookie = new Cookie("Articulos", json);*/
+                    response.addCookie(Utilidades.recargarCookie(usuario));
                 }
             }
 
