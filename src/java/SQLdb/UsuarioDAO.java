@@ -61,7 +61,6 @@ public class UsuarioDAO {
         try{
             Statement estatuto = conex.getConnection().createStatement();
             PreparedStatement prep = conex.getConnection().prepareStatement("INSERT INTO `usuarios` (`Usuario`, `Password`, `Nombre`) VALUES (?, ?, ?)");
-            //estatuto.execute("INSERT INTO `usuarios`(`Usuario`, `Password`, `Nombre`) VALUES ('"+userReg.getUsuario()+"', '"+userReg.getPassword()+"', '"+userReg.getNombre()+"')");
             prep.setString(1, userReg.getUsuario());
             prep.setString(2, userReg.getPassword());
             prep.setString(3, userReg.getNombre());
@@ -74,32 +73,39 @@ public class UsuarioDAO {
         }
     }
     
-    //Actualizar usuarios *Nombre *Contraseña
-    public void actualizarDatos(String nombreAnt, String nombre, String pass){
-        DbConnection conex = new DbConnection();
-        String setter = null;
-        if(nombre != null && pass != null) setter = "Usuario = ?, Password = ?";
-        else if(nombre != null) setter = "Usuario = ?";
-        else if(pass != null) setter = "Password = ?"; 
-        
-        String query = "UPDATE `biblioteca`.`usuarios` SET "+setter+" WHERE `Usuario` = ?";
-        
+    public void actualizarDatos(Usuario actUser){
+        DbConnection conex = new DbConnection(); 
         try{
-            PreparedStatement prep = conex.getConnection().prepareStatement(query);
-            if(nombre != null && pass != null){
-                prep.setString(1, nombre);
-                prep.setString(2, pass);
-                prep.setString(3, nombreAnt);
-            }else{
-                prep.setString(1, nombre == null ? pass : nombre);
-                prep.setString(2, nombreAnt);
-            }
+            PreparedStatement prep = conex.getConnection().prepareStatement("UPDATE `biblioteca`.`usuarios` SET Nombre = ?, Password = ? WHERE `Usuario` = ?");
+            prep.setString(1, actUser.getNombre());
+            prep.setString(2, actUser.getPassword());
+            prep.setString(3, actUser.getUsuario());
+
             prep.executeUpdate();
             prep.close();
             conex.desconectar();
         }catch(SQLException e){
             e.printStackTrace();
         }
+    }
+    
+    public String nombreUser(String user){
+        DbConnection conex = new DbConnection();
+        String nombre = "";
+        try{
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT Nombre FROM `biblioteca`.`usuarios` WHERE BINARY Usuario = ?");
+            consulta.setString(1, user);
+            ResultSet res = consulta.executeQuery();
+            while(res.next()){
+                nombre = res.getString("Nombre");
+            }
+            res.close();
+            consulta.close();
+            conex.desconectar();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return nombre;
     }
     
     public void eliminarUsuario(String nombre){

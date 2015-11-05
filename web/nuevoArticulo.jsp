@@ -58,10 +58,22 @@ and open the template in the editor.
                 <ul class="nav navbar-nav navbar-right">
                 <%
                     String usuario = (String)session.getAttribute("usuario");
-                    
+                    String error = request.getParameter("error");
+                    String titulo = "";
+                    String descripcion = "";
+                    int categoria = 0;
+                    String url_imagen = "";
+                            
                     if(usuario == null){
                         response.sendRedirect("index.html");
                     }else{
+                        
+                        if(error != null){
+                            titulo = (String)session.getAttribute("titulo");
+                            descripcion = (String)session.getAttribute("descripcion");
+                            categoria = (Integer)session.getAttribute("categoria");
+                            url_imagen = (String)session.getAttribute("url_imagen");
+                        }
                 %>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <%=usuario%> <span class="caret"></span></a>
@@ -85,20 +97,22 @@ and open the template in the editor.
     <div class="container">
         <div class="col-md-4"></div>
         <div class="col-md-4" id="newArticulo">
-            <form action="NuevoArticuloServlet" method="POST" class="form-signin" id="formArticulo" role="formArticulo">
-
+            <form action="ArticuloServlet" method="POST" class="form-signin" id="formArticulo" role="formArticulo">
+                <%if(error != null){
+                    error = "El id del articulo ya ha sido registrado";
+                %>
+                <span><%=error%></span>
+                <%}%>
                 <input type="text" name="clave" id="Clave" class="form-control" placeholder="Clave">
-                <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo">
-                <textarea class="form-control" rows="5"  resize="vertical" name="descripcion" id="descripcion" placeholder="Descripción"></textarea> 
-                <select class="form-control" name="categoria">
-                    <option>Categoria</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo" value="<%=titulo%>">
+                <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripción"><%=descripcion%></textarea> 
+                <select class="form-control" name="categoria" id="categoria">
+                    <option value="0">Categoria</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
                 </select>
-                <input type="text" name="url" id="url" class="form-control" placeholder="URL">
+                <input type="text" name="url" id="url" class="form-control" placeholder="URL" value="<%=url_imagen%>">
                 <button class="btn btn-lg btn-success btn-block" type="submit">Guardar</button>
                 <input hidden name="accion" value="newArticulo"/>
             </form>
@@ -110,5 +124,10 @@ and open the template in the editor.
 	<script src="js/bootstrap/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
         <script src="js/script.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#categoria').val(<%=categoria%>);
+            });
+        </script>
 </body>
 </html>

@@ -42,6 +42,7 @@
 <body>
 
     <% 
+        String errorLogin = request.getParameter("errorLogin");
         String errorUsuario = request.getParameter("errorUsuario");
         String errorPass = request.getParameter("errorPass");
     %>
@@ -71,16 +72,23 @@
     <div class="container">
         <div class="col-md-4"></div>
         <div class="col-md-4" id="login">
-            <form action="LoginServlet" method="POST" class="form-signin" id="form" role="form">
-                <!--div class="text-center">
-                    <img id="avatar" src="./images/nadie.png" alt="avatar" width="80px" height="90px">
-                </div-->
+            <form action="UsuarioServlet" method="POST" class="form-signin" id="form" role="form">
+                <%if(errorLogin != null){
+                    errorLogin = "Usuario o Contraseña incorrecto";
+                %>
+                <span><%=errorLogin%></span>
+                <%}%>
                 <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario">
-                <%if(errorUsuario != null){%>
+                <%if(errorUsuario != null){
+                        errorUsuario = "No debe de contener numeros o caracteres especiales. Excepto: _ .Mayor a 4 caracteres";if(errorUsuario.equals("101")){
+                    }
+                %>
                 <span><%=errorUsuario%></span>
                 <%}%>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password">
-                <%if(errorPass != null){%>
+                <%if(errorPass != null){
+                    errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas. Mayor a 5 caracteres";
+                %>
                 <span><%=errorPass%></span>
                 <%}%>
                 <button class="btn btn-lg btn-success btn-block" type="submit">Iniciar sesión</button>
@@ -89,20 +97,7 @@
         </div>
         <div class="col-md-4"></div>
     </div>
-
-        <!--form action="LoginServlet">
-            Usuario: <input type="text" name="usuario">
-            <%if(errorUsuario != null){%>
-            <span><%=errorUsuario%></span>
-            <%}%>
-            <br><br>
-            Password: <input type="password" name="password">
-            <%if(errorPass != null){%>
-            <span><%=errorPass%></span>
-            <%}%>
-            <br><br>
-            <input type="submit" value="Enviar">
-        </form-->
+                
     <!-- JS  -->
     <script src="js/jquery-1.11.2.min.js"></script>
     <script src="js/jquery.validate.js"></script>

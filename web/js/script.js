@@ -2,14 +2,13 @@ $(document).ready(function () {
 
     $("#form").validate({
         rules:{
-            name:{
-                required: true,
-                nombreValid: true,
-                minlength: 10
-            },
             usuario:{
                 required: true,
-                minlength: 4
+                usuarioValid: true
+            },
+            name:{
+                required: true,
+                nombreValid: true
             },
             password:{
                 required: true,
@@ -22,25 +21,30 @@ $(document).ready(function () {
             }
         },
         messages:{
-            name:{
-                minlength:"Requiere un minimo de 10 caracteres"
+            usuario:{
+                required:"No puede estar vacío"
             },
-            usuario:"Requiere un minimo de 4 caracteres",
+            name:{
+                required:"No puede estar vacío"
+            },
             password:{
                 required: "Requiere contraseña",
-                minlength:"Requiere minimo 5 caracteres"
             },
             password2:"No coinciden las contraseñas"
         }
     });
     
+    jQuery.validator.addMethod("usuarioValid", function(value,element){
+        return this.optional(element) || /^([a-zA-Zñáéíóú 0-9\_]{4,60})$/i.test(value);
+    },"No debe de contener numeros o caracteres especiales. Excepto: _ .Mayor a 4 caracteres");
+    
     jQuery.validator.addMethod("nombreValid", function(value,element){
-        return this.optional(element) || /^([a-zA-Z ñáéíóú]{2,60})$/i.test(value);
-    },"No debe de contener numeros o caracteres especiales");
+        return this.optional(element) || /^([a-zA-Z ñáéíóú]{10,60})$/i.test(value);
+    },"No debe de contener numeros o caracteres especiales. Mayor a 10 Caracteres");
     
     jQuery.validator.addMethod("passwordValid", function(value,element){
-        return this.optional(element) || /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]+$/.test(value);
-    },"La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas.mayor a 5 caracteres");
+        return this.optional(element) || /^((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]{5,60})$/.test(value);
+    },"La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas. Mayor a 5 caracteres");
 
 
     $("#formArticulo").validate({
@@ -57,6 +61,13 @@ $(document).ready(function () {
                 required: true,
                 descripcionValid: true
             },
+            categoria:{
+                categoriaValid: true
+            },
+            url:{
+                required: true,
+                url: true
+            }
         },
         messages:{
             clave:{
@@ -68,23 +79,31 @@ $(document).ready(function () {
             descripcion:{
                 required:"No puede estar vacío"
             },
+            url:{
+                required:"No puede estar vacío",
+                url:"La URL esta incorrecto"
+            }
         }
     });
     
     jQuery.validator.addMethod("stringValid", function(value,element){
-        return this.optional(element) || /^([a-zA-Z 0-9 ñáéíóú]{2,60})$/i.test(value);
+        return this.optional(element) || /^([a-zA-Z 0-9 ñáéíóú]{1,60})$/i.test(value);
     },"Solo numeros y letras");
     
     jQuery.validator.addMethod("descripcionValid", function(value,element){
-        return this.optional(element) || /^([a-zA-Z 0-9 ñáéíóú \. \, \; \( \) \ \n"]{2,60})$/i.test(value);
+        return this.optional(element) || /^([a-zA-Z 0-9 ñáéíóú \. \, \; \( \) \ \n"]{1,60})$/i.test(value);
     },"No puede contener caracteres especiales. Excepto: . , ; ( ) \"");
+    
+    jQuery.validator.addMethod("categoriaValid", function(value,element){
+        return this.optional(element) || /^([1-9])$/i.test(value);
+    },"Debe seleccionar una categoría");
     
     $("#cerrar").click(function(){
      cerrar(); return false;
     });
     
     function cerrar(){
-        $.post("LoginServlet",{
+        $.post("UsuarioServlet",{
             accion:"cerrar",
         }, function(responseText){
             $(location).attr('href',"index.html"); 
@@ -98,7 +117,7 @@ $(document).ready(function () {
     function eliminarArticulo(){
         var clave1 = $("#clave1").text();
         
-        $.post("NuevoArticuloServlet",{
+        $.post("ArticuloServlet",{
             accion:"detallesArticulo",
             accion2:"eliminar",
             clave: clave1
@@ -118,7 +137,7 @@ $(document).ready(function () {
         var categoria1 = $("#categoria").val();
         var url1 = $("#url").val();
     
-        $.post("NuevoArticuloServlet",{
+        $.post("ArticuloServlet",{
             accion:"detallesArticulo",
             accion2:"modificar",
             clave: clave1,
@@ -127,7 +146,6 @@ $(document).ready(function () {
             categoria: categoria1,
             url: url1
         }, function(responseText){
-            alert(responseText);
             $(location).attr('href',"principal.jsp"); 
         });
         

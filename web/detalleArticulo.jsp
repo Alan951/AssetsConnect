@@ -60,9 +60,19 @@ and open the template in the editor.
                     String usuario = (String)session.getAttribute("usuario");
                     String id_articulo = request.getParameter("idArticulo");
                     
+                    String titulo = "";
+                    String descripcion = "";
+                    int categoria = 0;
+                    String url_imagen = "";
+                            
                     if(usuario == null){
                         response.sendRedirect("index.html");
                     }else{
+                    
+                        titulo = (String)session.getAttribute("titulo");
+                        descripcion = (String)session.getAttribute("descripcion");
+                        categoria = (Integer)session.getAttribute("categoria");
+                        url_imagen = (String)session.getAttribute("url_imagen");
                 %>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <%=usuario%> <span class="caret"></span></a>
@@ -87,16 +97,16 @@ and open the template in the editor.
         <div class="col-md-4"></div>
         <div class="col-md-4" id="newArticulo">
             <form class="form-signin" id="formArticulo" role="formArticulo">
-                <div type="text" name="clave" id="clave">Clave: <b id="clave1"><%=id_articulo%></b></div>
-                <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo">
-                <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripción"></textarea> 
+                <div name="clave" id="clave">Clave: <b id="clave1"><%=id_articulo%></b></div>
+                <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo" value="<%=titulo%>">
+                <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripción"><%=descripcion%></textarea> 
                 <select class="form-control" name="categoria" id="categoria">
-                    <option>Categoria</option>
+                    <option value="0">Categoria</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
-                <input type="text" name="url" id="url" class="form-control" placeholder="URL">
+                <input type="text" name="url" id="url" class="form-control" placeholder="URL" value="<%=url_imagen%>">
                 <div class="container">
                     <div class="col-xs-5 col-sm-2 col-md-2 col-lg-2">
                         <button class="btn btn-lg btn-danger btn-block" type="submit" id="eliminar">Eliminar</button>
@@ -116,5 +126,10 @@ and open the template in the editor.
 	<script src="js/bootstrap/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
         <script src="js/script.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#categoria').val(<%=categoria%>);
+            });
+        </script>
 </body>
 </html>

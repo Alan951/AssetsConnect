@@ -42,8 +42,8 @@
 <body>
 
     <% 
-        String errorName = request.getParameter("errorNombre");
         String errorUsuario = request.getParameter("errorUsuario");
+        String errorName = request.getParameter("errorNombre");
         String errorPass = request.getParameter("errorPass");
     %>
     <!--Menu-->
@@ -72,24 +72,32 @@
     <div class="container">
         <div class="col-md-4"></div>
         <div class="col-md-4" id="register">
-            <form action="RegistroServlet" method="POST" class="form-signin" id="form" role="form">
-                <!--div class="text-center">
-                    <img id="avatar" src="./images/nadie.png" alt="avatar">
-                </div-->
-                <input type="text" name="name" id="name" class="form-control" placeholder="Nombre">
-                <%if(errorName != null){%>
-                <span><%=errorName%></span>
-                <%}%>
+            <form action="UsuarioServlet" method="POST" class="form-signin" id="form" role="form">
                 <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario">
-                <%if(errorUsuario != null){%>
+                <%if(errorUsuario != null){
+                        errorUsuario = "No debe de contener numeros o caracteres especiales. Excepto: _ .Mayor a 4 caracteres";if(errorUsuario.equals("101")){
+                    }
+                  if(errorUsuario != null){
+                        errorUsuario = "Usuario ya existe";
+                    }
+                %>
                 <span><%=errorUsuario%></span>
                 <%}%>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Nombre">
+                <%if(errorName != null){
+                    errorName = "No debe de contener numeros o caracteres especiales. Mayor a 10 Caracteres";
+                %>
+                <span><%=errorName%></span>
+                <%}%>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password">
-                <%if(errorPass != null){%>
+                <%if(errorPass != null){
+                    errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas. Mayor a 5 caracteres";
+                %>
                 <span><%=errorPass%></span>
                 <%}%>
                 <input type="password" name="password2" id="password2" class="form-control" placeholder="Repetir Password">
                 <button class="btn btn-lg btn-success btn-block" type="submit">Registrar</button>
+                <input hidden name="accion" value="registrar"/>
             </form>
         </div>
         <div class="col-md-4"></div>

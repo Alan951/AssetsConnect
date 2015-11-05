@@ -55,42 +55,57 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="principal.jsp">
                     <img src="images/c_0.png" alt="AssetsConnect" width="30px" heigth="30px" style="display:inline-block">
                     AssetsConnect
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navHeader">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.jsp">Login</a></li>
-                    <li><a href="registro.jsp">Registro</a></li>
+                <%
+                    String usuario = (String)session.getAttribute("usuario");
+                    String nombre = (String)session.getAttribute("nombre");
+                    
+                    if(usuario == null){
+                        response.sendRedirect("index.html");
+                    }else{
+                %>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <%=usuario%> <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><span class="glyphicon glyphicon-cog icongrey" aria-hidden="true"></span>&nbsp;Información</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="registrarArticulo.jsp"><span class="glyphicon glyphicon-folder-open iconyellow" aria-hidden="true"></span>&nbsp;Nuevo Articulo</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" id="cerrar"><span class="glyphicon glyphicon-remove iconred"></span>&nbsp;Cerrar</a></li>
+                        </ul>
+                    </li>
+                <%
+                    }
+                %>
                 </ul>
             </div>
         </div>
     </div> 
 
-    <!--Login-->
+    <!--Modificar-->
     <div class="container">
         <div class="col-md-4"></div>
         <div class="col-md-4" id="register">
-            <form action="RegistroServlet" method="POST" class="form-signin" id="form" role="form">
-                <div class="text-center">
-                    <img id="avatar" src="./images/nadie.png" alt="avatar">
-                </div>
-                <input type="text" name="name" id="name" class="form-control" placeholder="Nombre">
+            <form action="UsuarioServlet" method="POST" class="form-signin" id="form" role="form">
+                <div id="Usuario">Usuario: <b><%=usuario%></b></div>
+                <input hidden name="usuario" value="<%=usuario%>">
+                <input type="text" name="name" id="name" class="form-control" placeholder="Nombre" value="<%=nombre%>">
                 <%if(errorName != null){%>
                 <span><%=errorName%></span>
-                <%}%>
-                <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario">
-                <%if(errorUsuario != null){%>
-                <span><%=errorUsuario%></span>
                 <%}%>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                 <%if(errorPass != null){%>
                 <span><%=errorPass%></span>
                 <%}%>
                 <input type="password" name="password2" id="password2" class="form-control" placeholder="Repetir Password">
-                <button class="btn btn-lg btn-success btn-block" type="submit">Registrar</button>
+                <button class="btn btn-lg btn-success btn-block" type="submit">Modificar</button>
+                <input hidden name="accion" value="modificar"/>
             </form>
         </div>
         <div class="col-md-4"></div>

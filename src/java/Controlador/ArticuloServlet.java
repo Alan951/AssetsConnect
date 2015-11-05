@@ -22,12 +22,14 @@ import Utilidades.Utilidades;
  *
  * @author Jorge Alan Villalón Pérez
  */
-public class NuevoArticuloServlet extends HttpServlet {
-
+public class ArticuloServlet extends HttpServlet {
+    private HttpSession sesion;
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            
             HttpSession sesion = request.getSession();
             Cookie cookie = null;
             
@@ -42,79 +44,92 @@ public class NuevoArticuloServlet extends HttpServlet {
             String accion = request.getParameter("accion");
             String accion2 = request.getParameter("accion2");
             
-
-            if (accion.equals("newArticulo")) {
+            if (accion.equals("newArticulo") || accion2.equals("modificar")) {
                 titulo = request.getParameter("titulo");
                 descripcion = request.getParameter("descripcion");
                 categoria = Integer.parseInt(request.getParameter("categoria"));
                 url_imagen = request.getParameter("url");
                 idArticulo = request.getParameter("clave");
-                
-                //Comprobacion de datos
-                
-                
-                if (url_imagen.equals("")) {
-                    url_imagen = "images/ArticuloDefault.jpg";
+            }else if (accion.equals("detallesArticulo")) {
+                idArticulo = request.getParameter("clave");
+            }
+            
+            boolean errorFlag = false;
+            String errorTitulo = "";
+            String errorDescripcion = "";
+            String errorCategoria = "";
+            String errorURL_imagen = "";
+            String errorIdArticulo = "";
+
+            //Comprobacion de datos
+            if (accion.equals("newArticulo") || accion2.equals("modificar")){ 
+                if(!idArticulo.matches("^([a-zA-Z 0-9 ñáéíóú]{1,60})$")){ 
+                    errorIdArticulo = "210";
+                    errorFlag = true;
+                }if(!titulo.matches("^([a-zA-Z 0-9 ñáéíóú]{1,60})$")){ 
+                    errorTitulo = "220";
+                    errorFlag = true;
+                }if(!descripcion.matches("^([a-zA-Z 0-9 ñáéíóú \\. \\, \\; \\( \\) \\ \\n\"]{1,60})$")){
+                    errorDescripcion = "230";
+                    errorFlag = true;
+                }if(categoria < 1){
+                    errorCategoria = "240";
+                    errorFlag = true;
+                }if(!url_imagen.matches("^(?:(?:(?:https?|ftp):)?\\/\\/)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})).?)(?::\\d{2,5})?(?:[/?#]\\S*)?$")){
+                    errorURL_imagen = "250";
+                    errorFlag = true;
                 }
-
-                Articulo articulo = new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario);
-
-                ArticuloDAO dao = new ArticuloDAO();
-
-                if (dao.verificarArticulo(idArticulo)) {
-                    //Enviar valores. No reescribir.
-                    response.sendRedirect("nuevoArticulo.jsp?error=200");
-                } else {
-                    dao.registrarArticulo(articulo);
-                    
-                    //Recargar Cookies                 
-                    /*ArticuloDAO artDAO = new ArticuloDAO();
-                    String json = new Gson().toJson(artDAO.getArticulos(usuario));
-                    System.out.println("JSON Registro: "+json);
-                    cookie = new Cookie("Articulos", json);*/
-                    response.addCookie(Utilidades.recargarCookie(usuario));
-
-                    //Reedireccionar a detalles del articulo
-                    response.sendRedirect("detalleArticulo.jsp?idArticulo="+idArticulo);
-                }
-            } else if (accion.equals("detallesArticulo")) {//    case "detallesArticulo":
-                if (accion2.equals("modificar")) {
-                    idArticulo = request.getParameter("clave");
-                    titulo = request.getParameter("titulo");
-                    descripcion = request.getParameter("descripcion");
-                    categoria = Integer.parseInt(request.getParameter("categoria"));
-                    url_imagen = request.getParameter("url");
-                    usuario = (String) sesion.getAttribute("usuario");
-
-                    Articulo articuloMod = new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario);
-
-                    ArticuloDAO daoMod = new ArticuloDAO();
-                    daoMod.modificarArticulo(articuloMod);
-                    if (url_imagen.equals("")) {
-                        url_imagen = "images/ArticuloDefault.jpg";
-                    }
-                    //Recargar Cookies                 
-                    /*ArticuloDAO artDAO = new ArticuloDAO();
-                    String json = new Gson().toJson(artDAO.getArticulos(usuario));
-                    System.out.println("JSON Registro: "+json);
-                    cookie = new Cookie("Articulos", json);*/
-                    response.addCookie(Utilidades.recargarCookie(usuario));
-                } else if (accion2.equals("eliminar")) {
-                    idArticulo = request.getParameter("clave");
-                    usuario = (String) sesion.getAttribute("usuario");
-                    
-                    ArticuloDAO artDao = new ArticuloDAO();
-                    
-                    artDao.eliminarArticulo(idArticulo,usuario);
-                    //Recargar Cookies                 
-                    /*ArticuloDAO artDAO = new ArticuloDAO();
-                    String json = new Gson().toJson(artDAO.getArticulos(usuario));
-                    System.out.println("JSON Registro: "+json);
-                    cookie = new Cookie("Articulos", json);*/
-                    response.addCookie(Utilidades.recargarCookie(usuario));
+            }else if (accion.equals("detallesArticulo")) {
+                if(!idArticulo.matches("^([a-zA-Z 0-9 ñáéíóú]{1,60})$")){ 
+                    errorIdArticulo = "210";
+                    errorFlag = true;
                 }
             }
 
+            if(errorFlag){
+                response.sendRedirect("nuevoArticulo.jsp?errorIdArticulo="+errorIdArticulo+"&errorTitulo="+errorTitulo+"&errorDescripcion="+errorDescripcion+"&errorCategoria="+errorCategoria+"&errorURL_imagen"+errorURL_imagen);
+            }else{
+                if (accion.equals("newArticulo")) {
+
+                    sesion = request.getSession();
+                    sesion.setAttribute("titulo", titulo);
+                    sesion.setAttribute("descripcion", descripcion);
+                    sesion.setAttribute("categoria", categoria);
+                    sesion.setAttribute("url_imagen", url_imagen);
+
+                    ArticuloDAO dao = new ArticuloDAO();
+
+                    if (dao.verificarArticulo(idArticulo)) {
+                        
+                        response.sendRedirect("nuevoArticulo.jsp?error=200");
+                    } else {
+
+                        dao.registrarArticulo(new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario));
+
+                        response.addCookie(Utilidades.recargarCookie(usuario));
+
+                        response.sendRedirect("detalleArticulo.jsp?idArticulo="+idArticulo);
+                    }
+                } else if (accion.equals("detallesArticulo")) {
+                    
+                    ArticuloDAO artDao = new ArticuloDAO();
+                    
+                    if (accion2.equals("modificar")) {
+                        
+                        artDao.modificarArticulo(new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario));
+
+                        response.addCookie(Utilidades.recargarCookie(usuario));
+
+                    } else if (accion2.equals("eliminar")) {
+                        
+                        usuario = (String) sesion.getAttribute("usuario");
+
+                        artDao.eliminarArticulo(idArticulo,usuario);
+
+                        response.addCookie(Utilidades.recargarCookie(usuario));
+                    }
+                }
+            }
         }
     }
 
