@@ -58,17 +58,19 @@ public class UsuarioServlet extends HttpServlet {
             }else{
                 
                 UsuarioDAO dao = new UsuarioDAO();
-                
+                response.addCookie(Utilidades.Utilidades.recargarCookieCategorias());
+                                        
                 if(accion.equals("loggin")){
 
                     if(dao.verificarLogin(new Usuario(usuario, password))){
                         
                         String nombre = dao.nombreUser(usuario);
+                        
                         sesion = request.getSession();
                         sesion.setAttribute("usuario", usuario);
                         sesion.setAttribute("nombre", nombre);
 
-                        response.addCookie(Utilidades.Utilidades.recargarCookie(usuario));
+                        response.addCookie(Utilidades.Utilidades.recargarCookieArticulos(usuario));
                         
                         response.sendRedirect("principal.jsp");
                     }else{

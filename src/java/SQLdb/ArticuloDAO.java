@@ -1,6 +1,7 @@
 package SQLdb;
 
 import Modelo.Articulo;
+import Modelo.Categoria;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -99,5 +100,24 @@ public class ArticuloDAO {
             e.printStackTrace();
         }
         return articulos;
+    }
+    
+    public ArrayList<Categoria> getCategorias(){
+        DbConnection conex = new DbConnection();
+        ResultSet result = null;
+        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+        try{
+            PreparedStatement prep = conex.getConnection().prepareStatement("SELECT * FROM `biblioteca`.`categorias` WHERE BINARY 1");
+            result = prep.executeQuery();
+            while(result.next()){
+               categorias.add(new Categoria(result.getInt("id_categoria"),result.getString("categoria")));
+            }
+            result.close();
+            prep.close();
+            conex.desconectar();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return categorias;
     }
 }

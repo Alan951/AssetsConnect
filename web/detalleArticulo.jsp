@@ -97,14 +97,20 @@ and open the template in the editor.
         <div class="col-md-4"></div>
         <div class="col-md-4" id="newArticulo">
             <form class="form-signin" id="formArticulo" role="formArticulo">
-                <div name="clave" id="clave">Clave: <b id="clave1"><%=id_articulo%></b></div>
+                <div id="clave">Clave: <b id="clave1"><%=id_articulo%></b></div>
                 <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo" value="<%=titulo%>">
                 <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripción"><%=descripcion%></textarea> 
                 <select class="form-control" name="categoria" id="categoria">
                     <option value="0">Categoria</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                    <%
+                        Cookie allCookie[] = request.getCookies();
+                        String categorias = null;
+                        for(Cookie temp: allCookie){
+                            if(temp.getName().equals("Categorias")){
+                                categorias = temp.getValue();
+                            }
+                        }
+                    %>
                 </select>
                 <input type="text" name="url" id="url" class="form-control" placeholder="URL" value="<%=url_imagen%>">
                 <div class="container">
@@ -128,6 +134,19 @@ and open the template in the editor.
         <script src="js/script.js"></script>
         <script>
             $(document).ready(function () {
+                var categorias = <%=categorias%>;
+                var id,name;
+                $.each(categorias,function(index,value){
+                    $.each(value,function(index,val){
+                        console.log(index+" - "+val);
+                        if(index == "idCategoria")
+                            id = val;
+                        if(index == "categoria")
+                            name = val;
+                    });
+                    $('#categoria').append('<option value="'+id+'">'+name+'</option>');
+                });
+                
                 $('#categoria').val(<%=categoria%>);
             });
         </script>

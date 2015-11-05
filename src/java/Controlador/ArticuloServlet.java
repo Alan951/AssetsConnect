@@ -106,7 +106,7 @@ public class ArticuloServlet extends HttpServlet {
 
                         dao.registrarArticulo(new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario));
 
-                        response.addCookie(Utilidades.recargarCookie(usuario));
+                        response.addCookie(Utilidades.recargarCookieArticulos(usuario));
 
                         response.sendRedirect("detalleArticulo.jsp?idArticulo="+idArticulo);
                     }
@@ -118,7 +118,7 @@ public class ArticuloServlet extends HttpServlet {
                         
                         artDao.modificarArticulo(new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario));
 
-                        response.addCookie(Utilidades.recargarCookie(usuario));
+                        response.addCookie(Utilidades.recargarCookieArticulos(usuario));
 
                     } else if (accion2.equals("eliminar")) {
                         
@@ -126,7 +126,7 @@ public class ArticuloServlet extends HttpServlet {
 
                         artDao.eliminarArticulo(idArticulo,usuario);
 
-                        response.addCookie(Utilidades.recargarCookie(usuario));
+                        response.addCookie(Utilidades.recargarCookieArticulos(usuario));
                     }
                 }
             }

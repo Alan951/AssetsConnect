@@ -46,11 +46,17 @@ public class Utilidades {
         return hash;
     }
     
-    public static Cookie recargarCookie(String usuario){
+    public static Cookie recargarCookieArticulos(String usuario){
         ArticuloDAO artDAO = new ArticuloDAO();
         String json = new Gson().toJson(artDAO.getArticulos(usuario));
-        System.out.println("JSON: "+json);
         Cookie cookie = new Cookie("Articulos", json);
+        return cookie;
+    }
+    
+    public static Cookie recargarCookieCategorias(){
+        ArticuloDAO artDAO = new ArticuloDAO();
+        String json = new Gson().toJson(artDAO.getCategorias());
+        Cookie cookie = new Cookie("Categorias", json);
         return cookie;
     }
 }

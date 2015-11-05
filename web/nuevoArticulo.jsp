@@ -108,9 +108,15 @@ and open the template in the editor.
                 <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripción"><%=descripcion%></textarea> 
                 <select class="form-control" name="categoria" id="categoria">
                     <option value="0">Categoria</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                    <%
+                        Cookie allCookie[] = request.getCookies();
+                        String categorias = null;
+                        for(Cookie temp: allCookie){
+                            if(temp.getName().equals("Categorias")){
+                                categorias = temp.getValue();
+                            }
+                        }
+                    %>
                 </select>
                 <input type="text" name="url" id="url" class="form-control" placeholder="URL" value="<%=url_imagen%>">
                 <button class="btn btn-lg btn-success btn-block" type="submit">Guardar</button>
@@ -126,6 +132,19 @@ and open the template in the editor.
         <script src="js/script.js"></script>
         <script>
             $(document).ready(function () {
+                var categorias = <%=categorias%>;
+                var id,name;
+                $.each(categorias,function(index,value){
+                    $.each(value,function(index,val){
+                        console.log(index+" - "+val);
+                        if(index == "idCategoria")
+                            id = val;
+                        if(index == "categoria")
+                            name = val;
+                    });
+                    $('#categoria').append('<option value="'+id+'">'+name+'</option>');
+                });
+                
                 $('#categoria').val(<%=categoria%>);
             });
         </script>
