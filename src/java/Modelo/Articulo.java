@@ -7,18 +7,28 @@ package Modelo;
 public class Articulo {
     private String titulo;
     private String descripcion;
-    private int categoria;
+    private int idcategoria;
+    private String categoria;
     private String url_imagen;
     private String idArticulo;
     private String usuario;
     
     //Metodo constructor para Articulo.
-    public Articulo(String titulo, String descripcion, int categoria, String url_imagen, String idArticulo, String usuario){
+    public Articulo(String titulo, String descripcion, int idcategoria, String url_imagen, String idArticulo, String usuario){
         setTitulo(titulo);
         setDescripcion(descripcion);
-        setCategoria(categoria);
+        setIdCategoria(idcategoria);
         setUrl_imagen(url_imagen);
         setIdArticulo(idArticulo);
+        setUsuario(usuario);
+    }
+    public Articulo(String idArticulo, String titulo, int idcategoria, String categoria, String descripcion, String url_imagen, String usuario){
+        setIdArticulo(idArticulo);
+        setTitulo(titulo);
+        setIdCategoria(idcategoria);
+        setCategoria(categoria);
+        setDescripcion(descripcion);
+        setUrl_imagen(url_imagen);
         setUsuario(usuario);
     }
     
@@ -51,17 +61,17 @@ public class Articulo {
     }
 
     /**
-     * @return the categoria
+     * @return the idcategoria
      */
-    public int getCategoria() {
-        return categoria;
+    public int getIdCategoria() {
+        return idcategoria;
     }
 
     /**
-     * @param categoria the categoria to set
+     * @param categoria the idcategoria to set
      */
-    public void setCategoria(int categoria) {
-        this.categoria = categoria;
+    public void setIdCategoria(int idcategoria) {
+        this.idcategoria = idcategoria;
     }
 
     /**
@@ -104,5 +114,19 @@ public class Articulo {
      */
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    /**
+     * @return the categoria
+     */
+    public String getCategoria() {
+        return categoria;
+    }
+
+    /**
+     * @param categoria the categoria to set
+     */
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

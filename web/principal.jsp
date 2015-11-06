@@ -58,6 +58,7 @@ and open the template in the editor.
                 <ul class="nav navbar-nav navbar-right">
                 <%
                     String usuario = (String)session.getAttribute("usuario");
+                    String articulos = "";
                     
                     if(usuario == null){
                         response.sendRedirect("index.html");
@@ -85,17 +86,11 @@ and open the template in the editor.
     <section class="articulos">
         <div class="container">
             <%
-                    Cookie allCookie[] = request.getCookies();
-                    String articulos = null;
-                    for(Cookie temp: allCookie){
-                        if(temp.getName().equals("Articulos")){
-                            articulos = temp.getValue();
-                            System.out.print(articulos);
-                        }
-                    }
-                    
+                if(usuario != null){
+                    articulos = (String)session.getAttribute("articulos");
+                }
             %>
-            
+            <div class="row"></div>
         </div>
     </section>
 	<!-- JS  -->
@@ -103,5 +98,40 @@ and open the template in the editor.
 	<script src="js/bootstrap/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
         <script src="js/script.js"></script>
+        <script>
+            $(document).ready(function () {
+                var articulos = <%=articulos%>;
+                var id,titulo,categoria,idcat,descripcion,url_imagen,usuario;
+                $.each(articulos,function(index,value){
+                    $.each(value,function(index,val){
+                        console.log(index+" - "+val);
+                        if(index == "idArticulo")
+                            id = val;
+                        if(index == "titulo")
+                            titulo = val;
+                        if(index == "categoria")
+                            categoria = val;
+                        if(index == "idcategoria")
+                            idcat = val;
+                        if(index == "descripcion")
+                            descripcion = val;
+                        if(index == "url_imagen")
+                            url_imagen = val;
+                        if(index == "usuario")
+                            usuario = val;
+                    });
+                    $('.row').append('  <div class="col-sm-6 col-md-4">'+
+                                            '<div class="thumbnail">'+
+                                                '<img src="'+url_imagen+'" alt="'+titulo+'">'+
+                                                '<div class="caption">'+
+                                                    '<h3>'+titulo+'</h3>'+
+                                                    '<p>'+descripcion+'</p>'+
+                                                    '<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</div>');
+                });
+            });
+        </script>
 </body>
 </html>

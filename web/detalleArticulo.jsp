@@ -138,7 +138,6 @@ and open the template in the editor.
                 var id,name;
                 $.each(categorias,function(index,value){
                     $.each(value,function(index,val){
-                        console.log(index+" - "+val);
                         if(index == "idCategoria")
                             id = val;
                         if(index == "categoria")

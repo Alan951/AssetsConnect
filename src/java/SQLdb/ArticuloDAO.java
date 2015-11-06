@@ -21,7 +21,7 @@ public class ArticuloDAO {
             prep.setString(2, articulo.getTitulo());
             prep.setString(3, articulo.getDescripcion());
             prep.setString(4, articulo.getUrl_imagen());
-            prep.setInt(5, articulo.getCategoria());
+            prep.setInt(5, articulo.getIdCategoria());
             prep.setString(6, articulo.getUsuario());
             prep.executeUpdate();
             prep.close();
@@ -38,7 +38,7 @@ public class ArticuloDAO {
             prep.setString(1, articulo.getTitulo());
             prep.setString(2, articulo.getDescripcion());
             prep.setString(3, articulo.getUrl_imagen());
-            prep.setInt(4, articulo.getCategoria());
+            prep.setInt(4, articulo.getIdCategoria());
             prep.setString(5, articulo.getIdArticulo());
             prep.executeUpdate();
             prep.close();
@@ -87,11 +87,11 @@ public class ArticuloDAO {
         ResultSet result = null;
         ArrayList<Articulo> articulos = new ArrayList<Articulo>();
         try{
-            PreparedStatement prep = conex.getConnection().prepareStatement("SELECT * FROM `biblioteca`.`articulos` WHERE BINARY `Usuario` = ?");
+            PreparedStatement prep = conex.getConnection().prepareStatement("SELECT a.id_articulo,a.Titulo,a.Descripcion,a.URL_imagen,a.Usuario,a.id_categoria,c.categoria FROM `articulos` AS a,`categorias` AS c WHERE BINARY a.id_categoria=c.id_categoria and a.Usuario = ?");
             prep.setString(1, nombre);
             result = prep.executeQuery();
             while(result.next()){
-               articulos.add(new Articulo(result.getString("Titulo"), result.getString("Descripcion"), result.getInt("id_categoria"), result.getString("URL_imagen"), result.getString("id_articulo"), result.getString("Usuario")));
+               articulos.add(new Articulo(result.getString("id_articulo"),result.getString("Titulo"),result.getInt("id_categoria"),result.getString("categoria"),result.getString("Descripcion"),result.getString("URL_imagen"),result.getString("Usuario")));
             }
             result.close();
             prep.close();

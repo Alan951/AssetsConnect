@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.Cookie;
+import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -46,11 +47,10 @@ public class Utilidades {
         return hash;
     }
     
-    public static Cookie recargarCookieArticulos(String usuario){
+    public static String recargarCookieArticulos(String usuario){
         ArticuloDAO artDAO = new ArticuloDAO();
         String json = new Gson().toJson(artDAO.getArticulos(usuario));
-        Cookie cookie = new Cookie("Articulos", json);
-        return cookie;
+        return json;
     }
     
     public static Cookie recargarCookieCategorias(){

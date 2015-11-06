@@ -91,7 +91,7 @@ $(document).ready(function () {
     },"Solo numeros y letras");
     
     jQuery.validator.addMethod("descripcionValid", function(value,element){
-        return this.optional(element) || /^([a-zA-Z 0-9 ñáéíóú \. \, \; \( \) \ \n"]{1,60})$/i.test(value);
+        return this.optional(element) || /^([a-zA-Z 0-9 ñáéíóú \. \, \; \( \) \"]{1,500})$/i.test(value);
     },"No puede contener caracteres especiales. Excepto: . , ; ( ) \"");
     
     jQuery.validator.addMethod("categoriaValid", function(value,element){
