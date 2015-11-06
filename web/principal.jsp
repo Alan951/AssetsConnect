@@ -97,14 +97,12 @@ and open the template in the editor.
 	<script src="js/jquery-1.11.2.min.js"></script>
 	<script src="js/bootstrap/bootstrap.min.js"></script>
         <script src="js/jquery.validate.js"></script>
-        <script src="js/script.js"></script>
         <script>
             $(document).ready(function () {
                 var articulos = <%=articulos%>;
                 var id,titulo,categoria,idcat,descripcion,url_imagen,usuario;
                 $.each(articulos,function(index,value){
                     $.each(value,function(index,val){
-                        console.log(index+" - "+val);
                         if(index == "idArticulo")
                             id = val;
                         if(index == "titulo")
@@ -122,16 +120,21 @@ and open the template in the editor.
                     });
                     $('.row').append('  <div class="col-sm-6 col-md-4">'+
                                             '<div class="thumbnail">'+
-                                                '<img src="'+url_imagen+'" alt="'+titulo+'">'+
+                                                '<img class="url_img_'+id+'" src="'+url_imagen+'" alt="'+titulo+'">'+
                                                 '<div class="caption">'+
-                                                    '<h3>'+titulo+'</h3>'+
-                                                    '<p>'+descripcion+'</p>'+
-                                                    '<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>'+
+                                                    '<h3 class="titulo_'+id+'">'+titulo+'</h3>'+
+                                                    '<h6>ID: '+id+'</h6>'+
+                                                    '<p><span>Categoría: '+categoria+'</span></p>'+
+                                                    '<input hidden class="idcategoria_'+id+'" value="'+idcat+'">'+
+                                                    '<p><h5>Descripción:</h5><pre class="descripcion_'+id+'">'+descripcion+'</pre></p>'+
+                                                    '<p><small><b>Autor: '+usuario+'</b></small></p>'+
+                                                    '<p style="text-align:right;"><a href="#" class="btn btn-primary editarArt" role="button" value="'+id+'">Editar</a></p>'+
                                                 '</div>'+
                                             '</div>'+
                                         '</div>');
                 });
             });
         </script>
+        <script src="js/script.js"></script>
 </body>
 </html>

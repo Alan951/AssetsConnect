@@ -43,7 +43,7 @@ public class ArticuloServlet extends HttpServlet {
             String accion = request.getParameter("accion");
             String accion2 = request.getParameter("accion2");
             
-            if (accion.equals("newArticulo") || accion2.equals("modificar")) {
+            if (accion.equals("newArticulo") || accion2.equals("modificar") || accion2.equals("editar")) {
                 titulo = request.getParameter("titulo");
                 descripcion = request.getParameter("descripcion");
                 categoria = Integer.parseInt(request.getParameter("categoria"));
@@ -61,7 +61,7 @@ public class ArticuloServlet extends HttpServlet {
             String errorIdArticulo = "";
 
             //Comprobacion de datos
-            if (accion.equals("newArticulo") || accion2.equals("modificar")){ 
+            if (accion.equals("newArticulo") || accion2.equals("modificar") || accion2.equals("editar")){ 
                 if(!idArticulo.matches("^([a-zA-Z 0-9 ñáéíóú]{1,60})$")){ 
                     errorIdArticulo = "210";
                     errorFlag = true;
@@ -105,7 +105,7 @@ public class ArticuloServlet extends HttpServlet {
 
                         dao.registrarArticulo(new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario));
 
-                        sesion.setAttribute("articulos",Utilidades.Utilidades.recargarCookieArticulos(usuario));
+                        sesion.setAttribute("articulos",Utilidades.Utilidades.recargarArticulos(usuario));
 
                         response.sendRedirect("detalleArticulo.jsp?idArticulo="+idArticulo);
                     }
@@ -117,7 +117,7 @@ public class ArticuloServlet extends HttpServlet {
                         
                         artDao.modificarArticulo(new Articulo(titulo, descripcion, categoria, url_imagen, idArticulo, usuario));
 
-                        sesion.setAttribute("articulos",Utilidades.Utilidades.recargarCookieArticulos(usuario));
+                        sesion.setAttribute("articulos",Utilidades.Utilidades.recargarArticulos(usuario));
 
                     } else if (accion2.equals("eliminar")) {
                         
@@ -125,7 +125,16 @@ public class ArticuloServlet extends HttpServlet {
 
                         artDao.eliminarArticulo(idArticulo,usuario);
 
-                        sesion.setAttribute("articulos",Utilidades.Utilidades.recargarCookieArticulos(usuario));
+                        sesion.setAttribute("articulos",Utilidades.Utilidades.recargarArticulos(usuario));
+                        
+                    } else if (accion2.equals("editar")){
+                        
+                        sesion = request.getSession();
+                        sesion.setAttribute("titulo", titulo);
+                        sesion.setAttribute("descripcion", descripcion);
+                        sesion.setAttribute("categoria", categoria);
+                        sesion.setAttribute("url_imagen", url_imagen);
+                    
                     }
                 }
             }

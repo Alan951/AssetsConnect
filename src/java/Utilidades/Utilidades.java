@@ -47,7 +47,7 @@ public class Utilidades {
         return hash;
     }
     
-    public static String recargarCookieArticulos(String usuario){
+    public static String recargarArticulos(String usuario){
         ArticuloDAO artDAO = new ArticuloDAO();
         String json = new Gson().toJson(artDAO.getArticulos(usuario));
         return json;

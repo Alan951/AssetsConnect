@@ -70,7 +70,7 @@ public class UsuarioServlet extends HttpServlet {
                         sesion = request.getSession();
                         sesion.setAttribute("usuario", usuario);
                         sesion.setAttribute("nombre", nombre);
-                        sesion.setAttribute("articulos",Utilidades.Utilidades.recargarCookieArticulos(usuario));
+                        sesion.setAttribute("articulos",Utilidades.Utilidades.recargarArticulos(usuario));
                         
                         response.sendRedirect("principal.jsp");
                     }else{

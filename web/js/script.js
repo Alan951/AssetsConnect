@@ -147,7 +147,30 @@ $(document).ready(function () {
             url: url1
         }, function(responseText){
             $(location).attr('href',"principal.jsp"); 
-        });
+        });  
+    }
+    
+    $(".editarArt").click(function(){
+        var id = $(this).attr('value');
+        editarArticulo(id); return false;
+    });
+    
+    function editarArticulo(id){
+        var titulo1 = $(".titulo_"+id).text();
+        var descripcion1 = $(".descripcion_"+id).text();
+        var categoria1 = $(".idcategoria_"+id).val();
+        var url1 = $(".url_img_"+id).attr('src');
         
+        $.post("ArticuloServlet",{
+            accion:"detallesArticulo",
+            accion2:"editar",
+            clave: id,
+            titulo: titulo1,
+            descripcion: descripcion1,
+            categoria: categoria1,
+            url: url1
+        }, function(responseText){
+            $(location).attr('href',"detalleArticulo.jsp?idArticulo="+id);
+        }); 
     }
 });
