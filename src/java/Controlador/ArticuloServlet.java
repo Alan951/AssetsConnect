@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -39,9 +39,15 @@ public class ArticuloServlet extends HttpServlet {
             String url_imagen = null;
             String idArticulo = null;
             String usuario = usuario = (String) sesion.getAttribute("usuario");
+            String buscar = null;
 
             String accion = request.getParameter("accion");
             String accion2 = request.getParameter("accion2");
+            String accion3 = request.getParameter("accion3");
+            
+            accion = (accion == null)? "" : request.getParameter("accion");
+            accion2 = (accion2 == null)? "" : request.getParameter("accion2");
+            accion3 = (accion3 == null)? "" : request.getParameter("accion3");
             
             if (accion.equals("newArticulo") || accion2.equals("modificar") || accion2.equals("editar")) {
                 titulo = request.getParameter("titulo");
@@ -51,6 +57,8 @@ public class ArticuloServlet extends HttpServlet {
                 idArticulo = request.getParameter("clave");
             }else if (accion.equals("detallesArticulo")) {
                 idArticulo = request.getParameter("clave");
+            }else if(accion3.equals("buscar")){
+                buscar = request.getParameter("buscador");
             }
             
             boolean errorFlag = false;
@@ -59,6 +67,7 @@ public class ArticuloServlet extends HttpServlet {
             String errorCategoria = "";
             String errorURL_imagen = "";
             String errorIdArticulo = "";
+            String errorBusqueda = "";
 
             //Comprobacion de datos
             if (accion.equals("newArticulo") || accion2.equals("modificar") || accion2.equals("editar")){ 
@@ -86,7 +95,10 @@ public class ArticuloServlet extends HttpServlet {
             }
 
             if(errorFlag){
-                response.sendRedirect("nuevoArticulo.jsp?errorIdArticulo="+errorIdArticulo+"&errorTitulo="+errorTitulo+"&errorDescripcion="+errorDescripcion+"&errorCategoria="+errorCategoria+"&errorURL_imagen"+errorURL_imagen);
+                if(accion.equals("newArticulo"))
+                    response.sendRedirect("nuevoArticulo.jsp?errorIdArticulo="+errorIdArticulo+"&errorTitulo="+errorTitulo+"&errorDescripcion="+errorDescripcion+"&errorCategoria="+errorCategoria+"&errorURL_imagen"+errorURL_imagen);
+                if(accion.equals("modificar") || accion2.equals("modificar"))
+                    response.sendRedirect("detalleArticulo.jsp?&errorTitulo="+errorTitulo+"&errorDescripcion="+errorDescripcion+"&errorCategoria="+errorCategoria+"&errorURL_imagen"+errorURL_imagen);
             }else{
                 if (accion.equals("newArticulo")) {
 
@@ -137,6 +149,15 @@ public class ArticuloServlet extends HttpServlet {
                     
                     }
                 }
+            } 
+            
+            if(accion3.equals("buscar")){
+                
+                sesion = request.getSession();
+                sesion.setAttribute("usuario", usuario);
+                sesion.setAttribute("articulos",Utilidades.Utilidades.buscarArticulos(usuario, buscar));
+                
+                response.sendRedirect("busqueda.jsp");
             }
         }
     }

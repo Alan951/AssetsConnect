@@ -35,87 +35,91 @@ public class UsuarioServlet extends HttpServlet {
             
             if(accion.equals("cerrar")){
                 sesion.invalidate();
+            }else if(accion.equals("principal")){
+                sesion.setAttribute("articulos",Utilidades.Utilidades.recargarArticulos((String)sesion.getAttribute("usuario")));        
+                
             }
             
-            String usuario = request.getParameter("usuario");
-            String password = request.getParameter("password");
+            if(accion.equals("loggin") || accion.equals("registrar") || accion.equals("modificar")){           
+                String usuario = request.getParameter("usuario");
+                String password = request.getParameter("password");
+                boolean errorFlag = false;
+                String errorUsuario = "";
+                String errorPass = "";
+                String errorLogin = "";
 
-            boolean errorFlag = false;
-            String errorUsuario = "";
-            String errorPass = "";
-            String errorLogin = "";
+                if(!usuario.matches("^([a-zA-Zñáéíóú 0-9\\_]{4,60})$")){
+                    errorUsuario = "100";
+                    errorFlag = true;
+                }if(!password.matches("^((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]{5,60})$")){ 
+                    errorPass = "120";
+                    errorFlag = true;
+                }
 
-            if(!usuario.matches("^([a-zA-Zñáéíóú 0-9\\_]{4,60})$")){
-                errorUsuario = "100";
-                errorFlag = true;
-            }if(!password.matches("^((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[A-Za-z0-9]{5,60})$")){ 
-                errorPass = "120";
-                errorFlag = true;
-            }
-
-            if(errorFlag){
-                response.sendRedirect("registro.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass);
-            }else{
-                
-                UsuarioDAO dao = new UsuarioDAO();
-                
-                response.addCookie(Utilidades.Utilidades.recargarCookieCategorias());
-                
-                if(accion.equals("loggin")){
-
-                    if(dao.verificarLogin(new Usuario(usuario, password))){
-                        
-                        String nombre = dao.nombreUser(usuario);
-                        
-                        sesion = request.getSession();
-                        sesion.setAttribute("usuario", usuario);
-                        sesion.setAttribute("nombre", nombre);
-                        sesion.setAttribute("articulos",Utilidades.Utilidades.recargarArticulos(usuario));
-                        
-                        response.sendRedirect("principal.jsp");
-                    }else{
-                        errorLogin = "102";
-                        response.sendRedirect("login.jsp?errorLogin="+errorLogin);
-                    }
+                if(errorFlag){
+                    response.sendRedirect("registro.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass);
                 }else{
 
-                    String nombre = request.getParameter("name");
+                    UsuarioDAO dao = new UsuarioDAO();
 
-                    String errorNombre = "";
+                    response.addCookie(Utilidades.Utilidades.recargarCookieCategorias());
 
-                    if(!nombre.matches("^([a-zA-Z ñáéíóú]{10,60})$")){ 
-                        errorNombre = "110";
-                        errorFlag = true;
-                    }
+                    if(accion.equals("loggin")){
 
-                    if(errorFlag){
-                        response.sendRedirect("registro.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass+"&errorNombre="+errorNombre);
+                        if(dao.verificarLogin(new Usuario(usuario, password))){
+
+                            String nombre = dao.nombreUser(usuario);
+
+                            sesion = request.getSession();
+                            sesion.setAttribute("usuario", usuario);
+                            sesion.setAttribute("nombre", nombre);
+                            sesion.setAttribute("articulos",Utilidades.Utilidades.recargarArticulos(usuario));
+
+                            response.sendRedirect("principal.jsp");
+                        }else{
+                            errorLogin = "102";
+                            response.sendRedirect("login.jsp?errorLogin="+errorLogin);
+                        }
                     }else{
 
-                        if(accion.equals("registrar")){
+                        String nombre = request.getParameter("name");
 
-                            if(dao.comprobarUsuario(usuario)){
-                                errorUsuario = "101";
+                        String errorNombre = "";
 
-                                response.sendRedirect("registro.jsp?errorUsuario="+errorUsuario);
-                            }else{
-                                dao.registrarUsuario(new Usuario(usuario, password, nombre));
+                        if(!nombre.matches("^([a-zA-Z ñáéíóú]{10,60})$")){ 
+                            errorNombre = "110";
+                            errorFlag = true;
+                        }
 
-                                sesion = request.getSession();
-                                sesion.setAttribute("usuario", usuario);
-                                sesion.setAttribute("nombre", nombre);
+                        if(errorFlag){
+                            response.sendRedirect("registro.jsp?errorUsuario="+errorUsuario+"&errorPass="+errorPass+"&errorNombre="+errorNombre);
+                        }else{
 
-                                response.sendRedirect("infoUsuario.jsp");
+                            if(accion.equals("registrar")){
+
+                                if(dao.comprobarUsuario(usuario)){
+                                    errorUsuario = "101";
+
+                                    response.sendRedirect("registro.jsp?errorUsuario="+errorUsuario);
+                                }else{
+                                    dao.registrarUsuario(new Usuario(usuario, password, nombre));
+
+                                    sesion = request.getSession();
+                                    sesion.setAttribute("usuario", usuario);
+                                    sesion.setAttribute("nombre", nombre);
+
+                                    response.sendRedirect("infoUsuario.jsp");
+                                }
+                            }else if(accion.equals("modificar")){
+
+                                    dao.actualizarDatos(new Usuario(usuario, password, nombre));
+
+                                    sesion = request.getSession();
+                                    sesion.setAttribute("usuario", usuario);
+                                    sesion.setAttribute("nombre", nombre);
+
+                                    response.sendRedirect("principal.jsp");
                             }
-                        }else if(accion.equals("modificar")){
-
-                                dao.actualizarDatos(new Usuario(usuario, password, nombre));
-
-                                sesion = request.getSession();
-                                sesion.setAttribute("usuario", usuario);
-                                sesion.setAttribute("nombre", nombre);
-
-                                response.sendRedirect("principal.jsp");
                         }
                     }
                 }

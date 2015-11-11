@@ -10,7 +10,6 @@ import com.google.gson.Gson;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.Cookie;
-import sun.misc.BASE64Encoder;
 
 /**
  *
@@ -50,6 +49,12 @@ public class Utilidades {
     public static String recargarArticulos(String usuario){
         ArticuloDAO artDAO = new ArticuloDAO();
         String json = new Gson().toJson(artDAO.getArticulos(usuario));
+        return json;
+    }
+    
+    public static String buscarArticulos(String usuario, String buscar){
+        ArticuloDAO artDAO = new ArticuloDAO();
+        String json = new Gson().toJson(artDAO.getBuscarArticulos(usuario,buscar));
         return json;
     }
     

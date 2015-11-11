@@ -102,6 +102,29 @@ public class ArticuloDAO {
         return articulos;
     }
     
+    public ArrayList<Articulo> getBuscarArticulos(String nombre, String buscar){
+        DbConnection conex = new DbConnection();
+        ResultSet result = null;
+        ArrayList<Articulo> articulos = new ArrayList<Articulo>();
+        
+        try{
+            PreparedStatement prep = conex.getConnection().prepareStatement("SELECT a.id_articulo,a.Titulo,a.Descripcion,a.URL_imagen,a.Usuario,a.id_categoria,c.categoria FROM `articulos` AS a,`categorias` AS c WHERE a.id_categoria=c.id_categoria and a.Usuario = ? and ((a.Descripcion like (?)) or (a.Titulo like (?)))");
+            prep.setString(1, nombre);
+            prep.setString(2, "%"+buscar+"%");
+            prep.setString(3, "%"+buscar+"%");
+            result = prep.executeQuery();
+            while(result.next()){
+               articulos.add(new Articulo(result.getString("id_articulo"),result.getString("Titulo"),result.getInt("id_categoria"),result.getString("categoria"),result.getString("Descripcion"),result.getString("URL_imagen"),result.getString("Usuario")));
+            }
+            result.close();
+            prep.close();
+            conex.desconectar();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return articulos;
+    }
+    
     public ArrayList<Categoria> getCategorias(){
         DbConnection conex = new DbConnection();
         ResultSet result = null;

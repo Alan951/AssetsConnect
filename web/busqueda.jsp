@@ -49,14 +49,20 @@ and open the template in the editor.
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href=principal.jsp>
+                <a class="navbar-brand" href="#" id="principal">
                     <img src="images/c_0.png" alt="AssetsConnect" width="30px" heigth="30px" style="display:inline-block">
                     AssetsConnect
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="navHeader">
+                <form action="ArticuloServlet" method="POST" class="navbar-form navbar-left"  id="busqueda" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Buscar" name="buscador">
+                    </div>
+                    <button type="submit" class="btn btn-group-sm">Buscar</button>
+                    <input hidden name="accion3" value="buscar"/>
+                </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="busqueda.jsp"><span class="glyphicon glyphicon-search icongrey" aria-hidden="true"></span></a></li>
                 <%
                     String usuario = (String)session.getAttribute("usuario");
                     String articulos = "";

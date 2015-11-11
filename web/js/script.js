@@ -173,4 +173,16 @@ $(document).ready(function () {
             $(location).attr('href',"detalleArticulo.jsp?idArticulo="+id);
         }); 
     }
+    
+    $("#principal").click(function(){
+        principal(); return false;
+    });
+    
+    function principal(){
+        $.post("UsuarioServlet",{
+            accion:"principal",
+        }, function(responseText){
+            $(location).attr('href',"principal.jsp"); 
+        });
+    }
 });

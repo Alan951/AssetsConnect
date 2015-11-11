@@ -17,7 +17,7 @@ body {
 }
 
 /*Login & Register & Modificar
-------------------*/
+-----------------------------*/
 form{
     padding: 10px;
 }
@@ -100,4 +100,11 @@ span{
 
 textarea{
     resize: none;
+}
+
+/*Busqueda
+---------*/
+#busqueda{
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
