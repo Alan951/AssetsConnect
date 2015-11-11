@@ -74,6 +74,17 @@
                 articulos, siempre y cuando se ha registrado.
             </p>
         </div>
+        <div class="row imagenesIntro ">
+            <div class="col-sm-3 col-md-3">
+                <img src="images/libros.png" alt="Libros" width="200px"height="350px">
+            </div>
+            <div class="col-sm-6 col-md-5">
+                <img src="images/peliculas.png" alt="Peliculas" width="400px"height="350px">
+            </div>
+            <div class="col-sm-6 col-md-4">
+                <img src="images/periodico.png" alt="Periodico" width="200px"height="300px">
+            </div>
+        </div>
     </section>
 	<!-- JS  -->
 	<script src="js/jquery-1.11.2.min.js"></script>

@@ -12,8 +12,17 @@ body {
 /*Index
 -------*/
 .intro{
-	padding-top: 15px;
-	font-size: 20px;
+    padding-top: 15px;
+    font-size: 20px;
+}
+
+.imagenesIntro{
+    padding-top: 15px;
+    padding-left: 90px;
+}
+
+.imagenesIntro > div >img{
+
 }
 
 /*Login & Register & Modificar
