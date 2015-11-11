@@ -2,13 +2,17 @@ package Modelo;
 
 /**
  *
- * @author Jorge Alan Villalón Pérez
+ * @author Jorge Alan Villalón Pérez 1588765
+ * @name Categoria
+ * @description Modelo del articulo para bteneros en la DB.
  */
 public class Categoria {
+    
+    //Declaración de variables
     private int idCategoria;
     private String categoria;
     
-    //Metodo constructor para Articulo.
+    //Metodo constructor para Categoria.
     public Categoria(int idCategoria, String categoria){
         setIdCategoria(idCategoria);
         setCategoria(categoria);

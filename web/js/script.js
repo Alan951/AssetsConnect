@@ -1,3 +1,10 @@
+/**
+ * @author Fernando Espino Iracheta 1446729
+ * @name script.js
+ * @description Funciones necesarios para validaciones de formularios,
+ *              y funciones con envios a servidor para cargar de datos.
+ */
+
 $(document).ready(function () {
 
     $("#form").validate({

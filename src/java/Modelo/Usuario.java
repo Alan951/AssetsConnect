@@ -1,24 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 
-
+/**
+ *
+ * @author Jorge Alan Villalón Pérez 1588765
+ * @name Usuario
+ * @description Modelo del usuario para su registro o actualizacion.
+ */
 public class Usuario {
+    
+    //Declaración de variables
     private String nombre;
     private String password;
     private String usuario;
     
-    //Metodo constructor utilizado al momento de registrar un usuario
+    //Metodo constructor utilizado al momento de registrar o actualizar un usuario
     public Usuario(String usuario, String password, String nombre){
         setNombre(nombre);
         setPassword(password);
         setUsuario(usuario);
     }
     
-    //Metodo constructor utilizado l momento del inicio de sesion de un usuario.
+    //Metodo constructor utilizado al momento del inicio de sesion de un usuario.
     public Usuario(String usuario, String password){
         setUsuario(usuario);
         setPassword(password);
@@ -49,13 +51,20 @@ public class Usuario {
      * @param password the password to set
      */
     public void setPassword(String password) {
+        //pasa por el procesos de Hash 
         this.password = Utilidades.Utilidades.cifrarDatos(password);
     }
     
+    /**
+     * @param usuario the usuario to set
+     */
     public void setUsuario(String usuario){
         this.usuario = usuario;
     }
     
+    /**
+     * @return the usuario
+     */
     public String getUsuario(){
         return usuario;
     }

@@ -1,28 +1,27 @@
 
 package SQLdb;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
 
 /**
  *
- * @author Jorge Alan Villalón Pérez
+ * @author Jorge Alan Villalón Pérez 1588765
+ * @name Articulo
+ * @description Funciones para la conexion y desconexion de DB
  */
 public class DbConnection {
+    
+    //Declaracion de variables
     static String bd;
     static String login;
     static String password;
     static String url;
-    
     Connection connection;
     
     public DbConnection(){
@@ -60,10 +59,12 @@ public class DbConnection {
         }
     }
     
+    //Obtener la conexion
     public Connection getConnection(){
             return connection;
     }
     
+    //Desconectar la conexion a la DB
     public void desconectar(){
         try{
             connection.close();

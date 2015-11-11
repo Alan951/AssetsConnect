@@ -1,7 +1,8 @@
 <%-- 
     Document   : registro
     Created on : 30/09/2015, 01:19:06 PM
-    Author     : fernandoei
+    Author     : fernando espino iracheta 1446729
+    Description: Formulario con validaciones correctas para dar de alta a un nuevo usuario.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -1,7 +1,8 @@
 <%-- 
-    Document   : registro
+    Document   : infoUsuario
     Created on : 30/09/2015, 01:19:06 PM
-    Author     : fernandoei
+    Author     : fernando espino iracheta 1446729  
+    Description: Formulario con validaciones correctas para modificar un usuario existente.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

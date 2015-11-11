@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<%-- 
+    Document   : detalleArticulo
+    Created on : 30/09/2015, 01:19:06 PM
+    Author     : fernando espino iracheta 1446729
+    Description: Formulario con validaciones correctas para modificar un art铆culo existente.
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +15,7 @@ and open the template in the editor.
     <title>AssetsConnect</title>
     <meta name="description" content="Creamos y actualizamos paginas web.">
     <meta name="author" content="AssetsConnect">
-    <meta name="keywords" content="software, app, development, app development, developers, desarrollo de software, desarrollo de apps, desarrollo de sistemas, dise駉 de apps, ux, user interface, dise駉 y c骴igo, dise駉 de informaci髇">
+    <meta name="keywords" content="software, app, development, app development, developers, desarrollo de software, desarrollo de apps, desarrollo de sistemas, dise帽o de apps, ux, user interface, dise帽o y c贸digo, dise帽o de informaci贸n">
 
     <!-- Fonts
     ================================================== -->
@@ -77,7 +79,7 @@ and open the template in the editor.
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <%=usuario%> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><span class="glyphicon glyphicon-cog icongrey" aria-hidden="true"></span>&nbsp;Informaci髇</a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-cog icongrey" aria-hidden="true"></span>&nbsp;Informaci贸n</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="registrarArticulo.jsp"><span class="glyphicon glyphicon-folder-open iconyellow" aria-hidden="true"></span>&nbsp;Nuevo Articulo</a></li>
                             <li role="separator" class="divider"></li>
@@ -99,7 +101,7 @@ and open the template in the editor.
             <form class="form-signin" id="formArticulo" role="formArticulo">
                 <div id="clave">Clave: <b id="clave1"><%=id_articulo%></b></div>
                 <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo" value="<%=titulo%>">
-                <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripci髇"><%=descripcion%></textarea> 
+                <textarea class="form-control" rows="5" name="descripcion" id="descripcion" placeholder="Descripci贸n"><%=descripcion%></textarea> 
                 <select class="form-control" name="categoria" id="categoria">
                     <option value="0">Categoria</option>
                     <%

@@ -2,9 +2,13 @@ package Modelo;
 
 /**
  *
- * @author Jorge Alan Villalón Pérez
+ * @author Jorge Alan Villalón Pérez 1588765
+ * @name Articulo
+ * @description Modelo del articulo para su registro o actualizacion.
  */
-public class Articulo {
+public final class Articulo {
+    
+    //Declaración de variables
     private String titulo;
     private String descripcion;
     private int idcategoria;
@@ -12,8 +16,8 @@ public class Articulo {
     private String url_imagen;
     private String idArticulo;
     private String usuario;
-    
-    //Metodo constructor para Articulo.
+
+    //Metodo constructor utilizado al momento de buscar articulos
     public Articulo(String titulo, String descripcion, int idcategoria, String url_imagen, String idArticulo, String usuario){
         setTitulo(titulo);
         setDescripcion(descripcion);
@@ -22,6 +26,8 @@ public class Articulo {
         setIdArticulo(idArticulo);
         setUsuario(usuario);
     }
+    
+    //Metodo constructor utilizado al momento de registar o actualizar articulos
     public Articulo(String idArticulo, String titulo, int idcategoria, String categoria, String descripcion, String url_imagen, String usuario){
         setIdArticulo(idArticulo);
         setTitulo(titulo);
@@ -68,7 +74,7 @@ public class Articulo {
     }
 
     /**
-     * @param categoria the idcategoria to set
+     * @param idcategoria the idcategoria to set
      */
     public void setIdCategoria(int idcategoria) {
         this.idcategoria = idcategoria;

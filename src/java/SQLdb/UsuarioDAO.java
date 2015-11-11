@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package SQLdb;
 
 import Modelo.Usuario;
@@ -13,7 +8,9 @@ import java.sql.Statement;
 
 /**
  *
- * @author Jorge Alan Villalón Pérez | Puto el que lo lea.
+ * @author Jorge Alan Villalón Pérez 1588765
+ * @name UsuarioDAO
+ * @description Funciones para registrar, actualizar, y verificar usuario
  */
 public class UsuarioDAO {
     

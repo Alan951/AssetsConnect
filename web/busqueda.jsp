@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<%-- 
+    Document   : principal
+    Created on : 30/09/2015, 01:19:06 PM
+    Author     : fernando espino iracheta 1446729
+    Description: Página con contenido de busqueda de todos los articulos registrados del usuario.
+--%>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

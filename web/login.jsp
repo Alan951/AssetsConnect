@@ -1,7 +1,8 @@
 <%-- 
-    Document   : login.jsp
+    Document   : login
     Created on : 19/09/2015, 12:47:47 AM
-    Author     : fernandoei
+    Author     : fernando espino iracheta 1446729
+    Description: Formulario simple de usario y password con validaciones correctas para inicio de sesión.
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

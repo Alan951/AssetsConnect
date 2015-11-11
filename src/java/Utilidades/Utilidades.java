@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Utilidades;
 
 import SQLdb.ArticuloDAO;
@@ -13,7 +8,9 @@ import javax.servlet.http.Cookie;
 
 /**
  *
- * @author jorge
+ * @author Jorge Alan Villalón Pérez 1588765
+ * @name Utilidades
+ * @description Funciones para cifrar la contraseña, obtener y buscar articulos
  */
 public class Utilidades {
 

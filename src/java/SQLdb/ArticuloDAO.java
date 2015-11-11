@@ -9,7 +9,9 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Jorge Alan Villalón Pérez
+ * @author Jorge Alan Villalón Pérez 1588765
+ * @name ArticuloDAO
+ * @description Funciones para registrar, eliminar, actualizar, verificar y obtener articulos y categorias.
  */
 public class ArticuloDAO {
     
