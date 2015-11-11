@@ -4,7 +4,6 @@
     Author     : fernando espino iracheta 1446729
     Description: Página con contenido de busqueda de todos los articulos registrados del usuario.
 --%>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>

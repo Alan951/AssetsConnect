@@ -4,8 +4,6 @@
     Author     : fernando espino iracheta 1446729
     Description: Formulario con validaciones correctas para dar de alta a un nuevo usuario.
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +13,7 @@
     <title>AssetsConnect</title>
     <meta name="description" content="Creamos y actualizamos paginas web.">
     <meta name="author" content="AssetsConnect">
-    <meta name="keywords" content="software, app, development, app development, developers, desarrollo de software, desarrollo de apps, desarrollo de sistemas, diseÃ±o de apps, ux, user interface, diseÃ±o y cÃ³digo, diseÃ±o de informaciÃ³n">
+    <meta name="keywords" content="software, app, development, app development, developers, desarrollo de software, desarrollo de apps, desarrollo de sistemas, diseño de apps, ux, user interface, diseño y código, diseño de información">
 
     <!-- Fonts
     ================================================== -->
@@ -92,7 +90,7 @@
                 <%}%>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                 <%if(errorPass != null){
-                    errorPass = "La contraseÃ±a debe de tener al menos 1 numero, letras mayusculas y minusculas. Mayor a 5 caracteres";
+                    errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas. Mayor a 5 caracteres";
                 %>
                 <span><%=errorPass%></span>
                 <%}%>

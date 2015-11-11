@@ -4,8 +4,6 @@
     Author     : fernando espino iracheta 1446729  
     Description: Formulario con validaciones correctas para modificar un usuario existente.
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +13,7 @@
     <title>AssetsConnect</title>
     <meta name="description" content="Creamos y actualizamos paginas web.">
     <meta name="author" content="AssetsConnect">
-    <meta name="keywords" content="software, app, development, app development, developers, desarrollo de software, desarrollo de apps, desarrollo de sistemas, diseÃ±o de apps, ux, user interface, diseÃ±o y cÃ³digo, diseÃ±o de informaciÃ³n">
+    <meta name="keywords" content="software, app, development, app development, developers, desarrollo de software, desarrollo de apps, desarrollo de sistemas, diseño de apps, ux, user interface, diseño y código, diseño de información">
 
     <!-- Fonts
     ================================================== -->
@@ -74,7 +72,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> <%=usuario%> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="infoUsuario.jsp"><span class="glyphicon glyphicon-cog icongrey" aria-hidden="true"></span>&nbsp;InformaciÃ³n</a></li>
+                            <li><a href="infoUsuario.jsp"><span class="glyphicon glyphicon-cog icongrey" aria-hidden="true"></span>&nbsp;Información</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="nuevoArticulo.jsp"><span class="glyphicon glyphicon-folder-open iconyellow" aria-hidden="true"></span>&nbsp;Nuevo Articulo</a></li>
                             <li role="separator" class="divider"></li>

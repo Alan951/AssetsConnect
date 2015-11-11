@@ -2,10 +2,8 @@
     Document   : login
     Created on : 19/09/2015, 12:47:47 AM
     Author     : fernando espino iracheta 1446729
-    Description: Formulario simple de usario y password con validaciones correctas para inicio de sesiÃ³n.
+    Description: Formulario simple de usario y password con validaciones correctas para inicio de sesión.
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +13,7 @@
     <title>AssetsConnect</title>
     <meta name="description" content="Creamos y actualizamos paginas web.">
     <meta name="author" content="AssetsConnect">
-    <meta name="keywords" content="software, app, development, app development, developers, desarrollo de software, desarrollo de apps, desarrollo de sistemas, diseÃ±o de apps, ux, user interface, diseÃ±o y cÃ³digo, diseÃ±o de informaciÃ³n">
+    <meta name="keywords" content="software, app, development, app development, developers, desarrollo de software, desarrollo de apps, desarrollo de sistemas, diseño de apps, ux, user interface, diseño y código, diseño de información">
 
     <!-- Fonts
     ================================================== -->
@@ -75,7 +73,7 @@
         <div class="col-md-4" id="login">
             <form action="UsuarioServlet" method="POST" class="form-signin" id="form" role="form">
                 <%if(errorLogin != null){
-                    errorLogin = "Usuario o ContraseÃ±a incorrecto";
+                    errorLogin = "Usuario o Contraseña incorrecto";
                 %>
                 <span><%=errorLogin%></span>
                 <%}%>
@@ -88,11 +86,11 @@
                 <%}%>
                 <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                 <%if(errorPass != null){
-                    errorPass = "La contraseÃ±a debe de tener al menos 1 numero, letras mayusculas y minusculas. Mayor a 5 caracteres";
+                    errorPass = "La contraseña debe de tener al menos 1 numero, letras mayusculas y minusculas. Mayor a 5 caracteres";
                 %>
                 <span><%=errorPass%></span>
                 <%}%>
-                <button class="btn btn-lg btn-success btn-block" type="submit">Iniciar sesiÃ³n</button>
+                <button class="btn btn-lg btn-success btn-block" type="submit">Iniciar sesión</button>
                 <input hidden name="accion" value="loggin"/>
             </form>
         </div>

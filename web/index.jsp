@@ -2,10 +2,8 @@
     Document   : index
     Created on : 30/09/2015, 01:19:06 PM
     Author     : fernando espino iracheta 1446729
-    Description: P谩gina principal de la aplicaci贸n, dando intoducci贸n de su contenido.
+    Description: P醙ina principal de la aplicaci髇, dando intoducci髇 de su contenido.
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,7 +13,7 @@
     <title>AssetsConnect</title>
     <meta name="description" content="Creamos y actualizamos paginas web.">
     <meta name="author" content="AssetsConnect">
-    <meta name="keywords" content="software, app, development, app development, developers, desarrollo de software, desarrollo de apps, desarrollo de sistemas, dise帽o de apps, ux, user interface, dise帽o y c贸digo, dise帽o de informaci贸n">
+    <meta name="keywords" content="software, app, development, app development, developers, desarrollo de software, desarrollo de apps, desarrollo de sistemas, dise駉 de apps, ux, user interface, dise駉 y c骴igo, dise駉 de informaci髇">
 
     <!-- Fonts
     ================================================== -->
@@ -70,7 +68,7 @@
         <div class="container">
             <h1>Bienvenido</h1>
             <p>
-                La principal funci贸n de esta p谩gina es contener informaci贸n detalla de cualquier articulo.
+                La principal funci髇 de esta p醙ina es contener informaci髇 detalla de cualquier articulo.
                 Estos articulos pueden ser, sipnosis de peliculas, libros, revistas, periodicos, etc. Para poder
                 ver los articulos es neceserio registrarse. De igual manera es posible que usted pueda subir 
                 articulos, siempre y cuando se ha registrado.
