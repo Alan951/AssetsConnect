@@ -2,7 +2,7 @@ package Modelo;
 
 /**
  *
- * @author Jorge Alan Villalón Pérez 1588765
+ * @author Erich Benjamin Silva García  1566176
  * @name Usuario
  * @description Modelo del usuario para su registro o actualizacion.
  */

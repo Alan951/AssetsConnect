@@ -2,7 +2,7 @@ package Modelo;
 
 /**
  *
- * @author Jorge Alan Villalón Pérez 1588765
+ * @author Erich Benjamin Silva García  1566176
  * @name Categoria
  * @description Modelo del articulo para bteneros en la DB.
  */
