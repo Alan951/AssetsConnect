@@ -113,11 +113,11 @@ and open the template in the editor.
                     %>
                 </select>
                 <input type="text" name="url" id="url" class="form-control" placeholder="URL" value="<%=url_imagen%>">
-                <div class="container">
-                    <div class="col-xs-5 col-sm-2 col-md-2 col-lg-2">
+                <div class="container botones">
+                    <div class="col-xs-5 col-sm-2 col-md-2 col-lg-2 eliminar">
                         <button class="btn btn-lg btn-danger btn-block" type="submit" id="eliminar">Eliminar</button>
                     </div>
-                    <div class="col-xs-7 col-sm-4 col-md-3 col-lg-3">
+                    <div class="col-xs-7 col-sm-4 col-md-3 col-lg-3 modificar">
                         <button class="btn btn-lg btn-success btn-block" type="submit" id="modificar">Guardar Cambios</button>
                 
                     </div>

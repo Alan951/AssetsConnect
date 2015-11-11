@@ -102,6 +102,19 @@ textarea{
     resize: none;
 }
 
+.botones{
+    padding-left: 45px;
+}
+.eliminar{
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100px;
+}
+
+.modificar{
+    width: 200px;
+}
+
 /*Busqueda
 ---------*/
 #busqueda{
