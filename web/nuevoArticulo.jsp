@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <%-- 
     Document   : nuevoArticulo
     Created on : 30/09/2015, 01:19:06 PM
