@@ -54,7 +54,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="index.jsp">
                     <img src="images/c_0.png" alt="AssetsConnect" width="30px" heigth="30px" style="display:inline-block">
                     AssetsConnect
                 </a>

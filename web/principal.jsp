@@ -62,7 +62,7 @@
                     String articulos = "";
                     
                     if(usuario == null){
-                        response.sendRedirect("index.html");
+                        response.sendRedirect("index.jsp");
                     }else{
                 %>
                     <li class="dropdown">
