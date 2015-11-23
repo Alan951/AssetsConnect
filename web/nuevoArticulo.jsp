@@ -66,7 +66,7 @@
                     String url_imagen = "";
                             
                     if(usuario == null){
-                        response.sendRedirect("index.html");
+                        response.sendRedirect("index.jsp");
                     }else{
                         
                         if(error != null){
